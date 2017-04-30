@@ -1,0 +1,127 @@
+CPN Tools state space report for:
+/cygdrive/D/Cabinet/__Articles/article 09/Nets/Grid_Inhibitor_Infinite.cpn
+Report generated: Thu Apr  6 23:41:21 2017
+
+
+ Statistics
+------------------------------------------------------------------------
+
+  State Space
+     Nodes:  39
+     Arcs:   66
+     Secs:   0
+     Status: Full
+
+  Scc Graph
+     Nodes:  4
+     Arcs:   7
+     Secs:   0
+
+
+ Boundedness Properties
+------------------------------------------------------------------------
+
+  Best Integer Bounds
+                             Upper      Lower
+     Net_Model'Active_Task 1 1          0
+     Net_Model'Available_Computing_Nodes 1
+                             4          3
+     Net_Model'Data_Read 1   1          0
+     Net_Model'Node_Chosen 1 1          0
+     Net_Model'Pending_Tasks 1
+                             2          2
+     Net_Model'Ploc 1        1          0
+     Net_Model'Pstor 1       1          0
+     Net_Model'Result 1      1          1
+
+  Best Upper Multi-set Bounds
+     Net_Model'Active_Task 1
+                         1`(15,0)++
+1`(15,20)++
+1`(15,30)++
+1`(15,40)++
+1`(30,0)++
+1`(30,30)++
+1`(30,40)
+     Net_Model'Available_Computing_Nodes 1
+                         1`10++
+1`20++
+1`30++
+1`40
+     Net_Model'Data_Read 1
+                         1`(15,20)++
+1`(15,30)++
+1`(15,40)++
+1`(30,30)++
+1`(30,40)
+     Net_Model'Node_Chosen 1
+                         1`(15,20)++
+1`(15,30)++
+1`(15,40)++
+1`(30,30)++
+1`(30,40)
+     Net_Model'Pending_Tasks 1
+                         1`(15,[1,2,3,4,5])++
+1`(30,[1])
+     Net_Model'Ploc 1    1`[1]
+     Net_Model'Pstor 1   1`[[1],[2],[3],[4],[5]]
+     Net_Model'Result 1  1`0++
+1`10++
+1`150
+
+  Best Lower Multi-set Bounds
+     Net_Model'Active_Task 1
+                         empty
+     Net_Model'Available_Computing_Nodes 1
+                         1`10
+     Net_Model'Data_Read 1
+                         empty
+     Net_Model'Node_Chosen 1
+                         empty
+     Net_Model'Pending_Tasks 1
+                         1`(15,[1,2,3,4,5])++
+1`(30,[1])
+     Net_Model'Ploc 1    empty
+     Net_Model'Pstor 1   empty
+     Net_Model'Result 1  empty
+
+
+ Home Properties
+------------------------------------------------------------------------
+
+  Home Markings
+     26 [15,19,29,39,28,...]
+
+
+ Liveness Properties
+------------------------------------------------------------------------
+
+  Dead Markings
+     None
+
+  Dead Transition Instances
+     None
+
+  Live Transition Instances
+     All
+
+
+ Fairness Properties
+------------------------------------------------------------------------
+
+  Impartial Transition Instances
+     Net_Model'choosing_node 1
+
+  Fair Transition Instances
+     Net_Model'reading_data_from_distributed_storage 1
+     Net_Model'reading_local_data 1
+
+  Just Transition Instances
+     Net_Model'computation_using_distributed_data_finished_successfully 1
+     Net_Model'computation_using_local_data_finished_successfully 1
+     Net_Model'node_runtime_error 1
+     Net_Model'store_data_into_distributed_storage 1
+     Net_Model'store_data_locally 1
+
+  Transition Instances with No Fairness
+     None

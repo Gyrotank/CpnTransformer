@@ -1,0 +1,158 @@
+CPN Tools state space report for:
+/cygdrive/D/Cabinet/workspace_Luna_AndroidCloud/CpnUnitTransformer/Grid_Inhibitor_Infinite_CpnToUnit.cpn
+Report generated: Fri Apr  7 00:16:17 2017
+
+
+ Statistics
+------------------------------------------------------------------------
+
+  State Space
+     Nodes:  27
+     Arcs:   44
+     Secs:   0
+     Status: Full
+
+  Scc Graph
+     Nodes:  1
+     Arcs:   0
+     Secs:   0
+
+
+ Boundedness Properties
+------------------------------------------------------------------------
+
+  Best Integer Bounds
+                             Upper      Lower
+     Net_Model'Active_Task 1 1          0
+     Net_Model'Active_Task_signal 1
+                             1          0
+     Net_Model'Available_Computing_Nodes_1 1
+                             10         0
+     Net_Model'Available_Computing_Nodes_2 1
+                             20         0
+     Net_Model'Available_Computing_Nodes_3 1
+                             30         0
+     Net_Model'Available_Computing_Nodes_4 1
+                             40         0
+     Net_Model'Data_Read 1   1          0
+     Net_Model'Node_Chosen 1 1          0
+     Net_Model'Node_Recover 1
+                             1          0
+     Net_Model'Pending_Tasks_1 1
+                             1          1
+     Net_Model'Pending_Tasks_2 1
+                             1          1
+     Net_Model'Ploc 1        1          0
+     Net_Model'Pstor 1       1          0
+     Net_Model'Result 1      1          1
+
+  Best Upper Multi-set Bounds
+     Net_Model'Active_Task 1
+                         1`()
+     Net_Model'Active_Task_signal 1
+                         1`()
+     Net_Model'Available_Computing_Nodes_1 1
+                         10`()
+     Net_Model'Available_Computing_Nodes_2 1
+                         20`()
+     Net_Model'Available_Computing_Nodes_3 1
+                         30`()
+     Net_Model'Available_Computing_Nodes_4 1
+                         40`()
+     Net_Model'Data_Read 1
+                         1`()
+     Net_Model'Node_Chosen 1
+                         1`()
+     Net_Model'Node_Recover 1
+                         1`()
+     Net_Model'Pending_Tasks_1 1
+                         1`()
+     Net_Model'Pending_Tasks_2 1
+                         1`()
+     Net_Model'Ploc 1    1`()
+     Net_Model'Pstor 1   1`()
+     Net_Model'Result 1  1`()
+
+  Best Lower Multi-set Bounds
+     Net_Model'Active_Task 1
+                         empty
+     Net_Model'Active_Task_signal 1
+                         empty
+     Net_Model'Available_Computing_Nodes_1 1
+                         empty
+     Net_Model'Available_Computing_Nodes_2 1
+                         empty
+     Net_Model'Available_Computing_Nodes_3 1
+                         empty
+     Net_Model'Available_Computing_Nodes_4 1
+                         empty
+     Net_Model'Data_Read 1
+                         empty
+     Net_Model'Node_Chosen 1
+                         empty
+     Net_Model'Node_Recover 1
+                         empty
+     Net_Model'Pending_Tasks_1 1
+                         1`()
+     Net_Model'Pending_Tasks_2 1
+                         1`()
+     Net_Model'Ploc 1    empty
+     Net_Model'Pstor 1   empty
+     Net_Model'Result 1  1`()
+
+
+ Home Properties
+------------------------------------------------------------------------
+
+  Home Markings
+     All
+
+
+ Liveness Properties
+------------------------------------------------------------------------
+
+  Dead Markings
+     None
+
+  Dead Transition Instances
+     None
+
+  Live Transition Instances
+     All
+
+
+ Fairness Properties
+------------------------------------------------------------------------
+
+  Impartial Transition Instances
+     None
+
+  Fair Transition Instances
+     Net_Model'node_recovered_from_error_1 1
+     Net_Model'node_recovered_from_error_2 1
+     Net_Model'node_recovered_from_error_3 1
+     Net_Model'node_recovered_from_error_4 1
+     Net_Model'reading_data_from_distributed_storage 1
+     Net_Model'reading_local_data 1
+
+  Just Transition Instances
+     Net_Model'choosing_node_1 1
+     Net_Model'choosing_node_2 1
+     Net_Model'choosing_node_3 1
+     Net_Model'choosing_node_4 1
+     Net_Model'computation_using_distributed_data_finished_successfully_1 1
+     Net_Model'computation_using_distributed_data_finished_successfully_2 1
+     Net_Model'computation_using_distributed_data_finished_successfully_3 1
+     Net_Model'computation_using_distributed_data_finished_successfully_4 1
+     Net_Model'computation_using_local_data_finished_successfully_1 1
+     Net_Model'computation_using_local_data_finished_successfully_2 1
+     Net_Model'computation_using_local_data_finished_successfully_3 1
+     Net_Model'computation_using_local_data_finished_successfully_4 1
+     Net_Model'node_runtime_error 1
+     Net_Model'store_data_into_distributed_storage_1 1
+     Net_Model'store_data_into_distributed_storage_2 1
+     Net_Model'store_data_locally_1 1
+     Net_Model'store_data_locally_2 1
+
+  Transition Instances with No Fairness
+     None

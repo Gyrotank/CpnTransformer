@@ -1,6 +1,6 @@
 CPN Tools state space report for:
-/cygdrive/D/Cabinet/__Articles/article 09/Nets/Grid_Inhibitor_Infinite.cpn
-Report generated: Thu Apr  6 23:41:21 2017
+/cygdrive/D/Cabinet/workspace_Luna_AndroidCloud/CpnUnitTransformer/resources/G1.cpn
+Report generated: Mon May  1 12:41:11 2017
 
 
  Statistics

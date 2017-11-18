@@ -1,0 +1,8 @@
+store_data_locally	1
+store_data_into_distributed_storage	2
+choosing_node 3
+reading_local_data 4
+reading_data_from_distributed_storage 5
+computation_using_local_data_finished_successfully 6
+computation_using_distributed_data_finished_successfully 7
+node_runtime_error 8

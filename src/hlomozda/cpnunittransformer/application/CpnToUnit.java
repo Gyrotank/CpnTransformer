@@ -22,15 +22,15 @@ import hlomozda.cpnunittransformer.tss.CpnTssFinderRunner;
 import hlomozda.cpnunittransformer.utils.IncidenceMatrixBuilder;
 
 public class CpnToUnit {    
-    
+
     public static void main(final String[] args) throws IOException {
         InputStream in = new FileInputStream(args[0]);
         CpnParser parser = new DomCpnParser();
         ColoredPetriNet inputCpn = parser.parse(in);        
-        
+
         System.out.println("Input CPN: ");
         printCpnInfo(inputCpn);
-        
+
         CpnTransformer transformer = new CpnUnitTransformer();
         CpnGenerator cut = new CpnXmlGenerator();
         ColoredPetriNet outputCpn = transformer.transform(inputCpn);
@@ -41,66 +41,68 @@ public class CpnToUnit {
             outCpnNet = new FileOutputStream(args[1]);
         }
         cut.generate(outputCpn, outCpnNet);
-        
+
         System.out.println("Output CPN: ");
         printCpnInfo(outputCpn);
-        
-        OutputStream outCpnNetTssReport;
-        String tssReportFileName;
-        if (args.length == 1) {
-            tssReportFileName = args[0].substring(0, args[0].lastIndexOf(".")) + "_CpnToUnit_TSS_Report.txt";
-            outCpnNetTssReport = new FileOutputStream(tssReportFileName);
-        } else {
-            tssReportFileName = args[1].substring(0, args[0].lastIndexOf(".")) + "_TSS_Report.txt";
-            outCpnNetTssReport = new FileOutputStream(tssReportFileName);
-        }        
-        
-        System.out.println("Generating structural analysis report...");
-        outCpnNetTssReport.write("=====================".getBytes());
-        outCpnNetTssReport.write(System.lineSeparator().getBytes());
-        outCpnNetTssReport.write("TSS Analysis Results:".getBytes());
-        outCpnNetTssReport.write(System.lineSeparator().getBytes());
-        outCpnNetTssReport.write("=====================".getBytes());
-        outCpnNetTssReport.write(System.lineSeparator().getBytes());
-        
-        List<Integer[][]> matricesForPage = IncidenceMatrixBuilder.buildMatrix(outputCpn);
-        matricesForPage.stream()
+        System.out.println("Output CPN created successfully");
+
+        if (reportToBeGenerated(args)) {
+            OutputStream outCpnNetTssReport;
+            String tssReportFileName;
+            if (args.length == 1) {
+                tssReportFileName = args[0].substring(0, args[0].lastIndexOf(".")) + "_CpnToUnit_TSS_Report.txt";
+                outCpnNetTssReport = new FileOutputStream(tssReportFileName);
+            } else {
+                tssReportFileName = args[1].substring(0, args[0].lastIndexOf(".")) + "_TSS_Report.txt";
+                outCpnNetTssReport = new FileOutputStream(tssReportFileName);
+            }        
+
+            System.out.println("Generating structural analysis report...");
+            outCpnNetTssReport.write("=====================".getBytes());
+            outCpnNetTssReport.write(System.lineSeparator().getBytes());
+            outCpnNetTssReport.write("TSS Analysis Results:".getBytes());
+            outCpnNetTssReport.write(System.lineSeparator().getBytes());
+            outCpnNetTssReport.write("=====================".getBytes());
+            outCpnNetTssReport.write(System.lineSeparator().getBytes());
+
+            List<Integer[][]> matricesForPage = IncidenceMatrixBuilder.buildMatrix(outputCpn);
+            matricesForPage.stream()
             .forEach(matrixForPage -> {
                 try {
                     outCpnNetTssReport.write(("Places:" + System.lineSeparator()).getBytes());
                     outputCpn.getPages().get(matricesForPage.lastIndexOf(matrixForPage)).getPlaces().stream()
-                        .forEach(new Consumer<Place>() {
-                            int i = 1;
-                            
-                            public void accept(Place place) {
-                                try {
-                                    outCpnNetTssReport.write(((i++) + " # " 
+                    .forEach(new Consumer<Place>() {
+                        int i = 1;
+
+                        public void accept(Place place) {
+                            try {
+                                outCpnNetTssReport.write(((i++) + " # " 
                                         + place.getName().getText().replace("\n", " ") 
-                                            + System.lineSeparator()).getBytes());
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
+                                        + System.lineSeparator()).getBytes());
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        });                    
+                        }
+                    });                    
                     outCpnNetTssReport.write(System.lineSeparator().getBytes());
-                    
+
                     outCpnNetTssReport.write(("Transitions:" + System.lineSeparator()).getBytes());
                     outputCpn.getPages().get(matricesForPage.lastIndexOf(matrixForPage)).getTransitions().stream()
-                        .forEach(new Consumer<Transition>() {
-                            int i = 1;
-                            
-                            public void accept(Transition transition) {
-                                try {
-                                    outCpnNetTssReport.write(((i++) + " # " 
-                                            + transition.getName().getText().replace("\n", " ") 
-                                            + System.lineSeparator()).getBytes());
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
+                    .forEach(new Consumer<Transition>() {
+                        int i = 1;
+
+                        public void accept(Transition transition) {
+                            try {
+                                outCpnNetTssReport.write(((i++) + " # " 
+                                        + transition.getName().getText().replace("\n", " ") 
+                                        + System.lineSeparator()).getBytes());
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        });                    
+                        }
+                    });                    
                     outCpnNetTssReport.write(System.lineSeparator().getBytes());
-                    
+
                     outCpnNetTssReport.write("Incidence matrix:".getBytes());
                     outCpnNetTssReport.write(System.lineSeparator().getBytes());
                     for (Integer[] row : matrixForPage) {
@@ -134,12 +136,22 @@ public class CpnToUnit {
                     e.printStackTrace();
                 }
             });
-        
-        System.out.println("Structural analysis report generated and saved to " + tssReportFileName);
-        outCpnNet.close();
-        outCpnNetTssReport.close();
+
+            System.out.println("Structural analysis report generated and saved to " + tssReportFileName);
+            outCpnNet.close();
+            outCpnNetTssReport.close();
+        }
     }
     
+    private static boolean reportToBeGenerated(final String[] args) {
+        for (String argument : args) {
+            if ("-r".equals(argument)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static void printCpnInfo(final ColoredPetriNet cpn) {
         int cpnPagesCount = cpn.getPages().size();
         int cpnPlacesCount = 0;

@@ -92,7 +92,7 @@ public class CpnTssFinder {
             }
             
             if ((mZero.isEmpty() && mMinus.isEmpty()) || 
-                    (mZero.isEmpty() && mMinus.isEmpty())) {
+                    (mZero.isEmpty() && mPlus.isEmpty())) {
                 return new ArrayList<>();
             }
             

@@ -13,4 +13,11 @@ If you want to generate full TSS analysis report, run the program with -r flag:
 
 \> java CpnToUnit file1 file2 -r 
 
+
+You can also run program with a single argument (name of the source file):
+
+\> java CpnToUnit sourceFile.cpn
+
+In this case, the output file will be created named sourceFile_CpnToUnit.cpn.
+
 The program uses modified CPN parser originally written by Oleg Matsuk, which turns XML CPN representation into an object form.

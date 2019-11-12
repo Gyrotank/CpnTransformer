@@ -22,7 +22,7 @@ public class ColoredPetriNet {
     //ADDED BY DMYTRO HLOMOZDA
     public void setDeclarations(final List<String> declarations) {
         this.declarations.clear();
-        declarations.stream().forEach(this::addDeclaration);
+        declarations.forEach(this::addDeclaration);
     }
 
     public void addDeclaration(final String declaration) {
@@ -36,7 +36,7 @@ public class ColoredPetriNet {
     //ADDED BY DMYTRO HLOMOZDA
     public void setPages(final List<Page> pages) {
         this.pages.clear();
-        pages.stream().forEach(this::addPage);
+        pages.forEach(this::addPage);
     }
     
     public void addPage(final Page page) {

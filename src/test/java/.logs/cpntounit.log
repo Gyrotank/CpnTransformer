@@ -1,0 +1,167 @@
+2019-11-12 16:46:14 INFO  CpnToUnit:35 - Input CPN: 
+2019-11-12 16:46:14 INFO  CpnToUnit:169 - -- 2 pages;
+2019-11-12 16:46:14 INFO  CpnToUnit:170 - -- 8 places;
+2019-11-12 16:46:14 INFO  CpnToUnit:171 - -- 8 transitions;
+2019-11-12 16:46:14 INFO  CpnToUnit:172 - -- 34 arcs.
+
+
+2019-11-12 16:46:15 INFO  CpnToUnit:49 - Output CPN: 
+2019-11-12 16:46:15 INFO  CpnToUnit:169 - -- 2 pages;
+2019-11-12 16:46:15 INFO  CpnToUnit:170 - -- 13 places;
+2019-11-12 16:46:15 INFO  CpnToUnit:171 - -- 22 transitions;
+2019-11-12 16:46:15 INFO  CpnToUnit:172 - -- 146 arcs.
+
+
+2019-11-12 16:46:15 INFO  CpnToUnit:51 - Output CPN created successfully
+2019-11-12 16:56:22 INFO  CpnToUnit:35 - Input CPN: 
+2019-11-12 16:56:22 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 16:56:22 INFO  CpnToUnit:166 - -- 8 places;
+2019-11-12 16:56:22 INFO  CpnToUnit:167 - -- 8 transitions;
+2019-11-12 16:56:22 INFO  CpnToUnit:168 - -- 34 arcs.
+
+
+2019-11-12 16:56:23 INFO  CpnToUnit:49 - Output CPN: 
+2019-11-12 16:56:23 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 16:56:23 INFO  CpnToUnit:166 - -- 13 places;
+2019-11-12 16:56:23 INFO  CpnToUnit:167 - -- 22 transitions;
+2019-11-12 16:56:23 INFO  CpnToUnit:168 - -- 146 arcs.
+
+
+2019-11-12 16:56:23 INFO  CpnToUnit:51 - Output CPN created successfully
+2019-11-12 16:57:24 INFO  CpnToUnit:35 - Input CPN: 
+2019-11-12 16:57:24 INFO  CpnToUnit:164 - -- 2 pages;
+2019-11-12 16:57:24 INFO  CpnToUnit:165 - -- 8 places;
+2019-11-12 16:57:24 INFO  CpnToUnit:166 - -- 8 transitions;
+2019-11-12 16:57:24 INFO  CpnToUnit:167 - -- 34 arcs.
+
+
+2019-11-12 16:57:25 INFO  CpnToUnit:49 - Output CPN: 
+2019-11-12 16:57:25 INFO  CpnToUnit:164 - -- 2 pages;
+2019-11-12 16:57:25 INFO  CpnToUnit:165 - -- 13 places;
+2019-11-12 16:57:25 INFO  CpnToUnit:166 - -- 22 transitions;
+2019-11-12 16:57:25 INFO  CpnToUnit:167 - -- 146 arcs.
+
+
+2019-11-12 16:57:25 INFO  CpnToUnit:51 - Output CPN created successfully
+2019-11-12 17:07:28 INFO  CpnToUnit:35 - Input CPN: 
+2019-11-12 17:07:28 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 17:07:28 INFO  CpnToUnit:166 - -- 8 places;
+2019-11-12 17:07:28 INFO  CpnToUnit:167 - -- 8 transitions;
+2019-11-12 17:07:28 INFO  CpnToUnit:168 - -- 34 arcs.
+
+
+2019-11-12 17:07:28 INFO  CpnToUnit:50 - Output CPN: 
+2019-11-12 17:07:28 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 17:07:28 INFO  CpnToUnit:166 - -- 13 places;
+2019-11-12 17:07:28 INFO  CpnToUnit:167 - -- 22 transitions;
+2019-11-12 17:07:28 INFO  CpnToUnit:168 - -- 146 arcs.
+
+
+2019-11-12 17:07:28 INFO  CpnToUnit:52 - Output CPN created successfully
+2019-11-12 17:12:31 INFO  CpnToUnit:35 - Input CPN: 
+2019-11-12 17:12:31 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 17:12:31 INFO  CpnToUnit:166 - -- 8 places;
+2019-11-12 17:12:31 INFO  CpnToUnit:167 - -- 8 transitions;
+2019-11-12 17:12:31 INFO  CpnToUnit:168 - -- 34 arcs.
+
+
+2019-11-12 17:12:32 INFO  CpnToUnit:50 - Output CPN: 
+2019-11-12 17:12:32 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 17:12:32 INFO  CpnToUnit:166 - -- 13 places;
+2019-11-12 17:12:32 INFO  CpnToUnit:167 - -- 22 transitions;
+2019-11-12 17:12:32 INFO  CpnToUnit:168 - -- 146 arcs.
+
+
+2019-11-12 17:12:32 INFO  CpnToUnit:52 - Output CPN created successfully
+2019-11-12 17:13:08 INFO  CpnToUnit:35 - Input CPN: 
+2019-11-12 17:13:08 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 17:13:08 INFO  CpnToUnit:166 - -- 8 places;
+2019-11-12 17:13:08 INFO  CpnToUnit:167 - -- 8 transitions;
+2019-11-12 17:13:08 INFO  CpnToUnit:168 - -- 34 arcs.
+
+
+2019-11-12 17:13:09 INFO  CpnToUnit:50 - Output CPN: 
+2019-11-12 17:13:09 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 17:13:09 INFO  CpnToUnit:166 - -- 13 places;
+2019-11-12 17:13:09 INFO  CpnToUnit:167 - -- 22 transitions;
+2019-11-12 17:13:09 INFO  CpnToUnit:168 - -- 146 arcs.
+
+
+2019-11-12 17:13:09 INFO  CpnToUnit:52 - Output CPN created successfully
+2019-11-12 17:13:09 INFO  CpnToUnit:63 - Generating structural analysis report...
+2019-11-12 17:17:30 INFO  CpnToUnit:141 - Structural analysis report generated and saved to resources\G1\G1_CpnToUnit_TSS_Report.txt
+2019-11-12 17:20:55 INFO  CpnToUnit:35 - Input CPN: 
+2019-11-12 17:20:55 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 17:20:55 INFO  CpnToUnit:166 - -- 8 places;
+2019-11-12 17:20:55 INFO  CpnToUnit:167 - -- 8 transitions;
+2019-11-12 17:20:55 INFO  CpnToUnit:168 - -- 34 arcs.
+
+
+2019-11-12 17:20:56 INFO  CpnToUnit:50 - Output CPN: 
+2019-11-12 17:20:56 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 17:20:56 INFO  CpnToUnit:166 - -- 13 places;
+2019-11-12 17:20:56 INFO  CpnToUnit:167 - -- 22 transitions;
+2019-11-12 17:20:56 INFO  CpnToUnit:168 - -- 146 arcs.
+
+
+2019-11-12 17:20:56 INFO  CpnToUnit:52 - Output CPN created successfully
+2019-11-12 17:30:22 INFO  CpnToUnit:35 - Input CPN: 
+2019-11-12 17:30:22 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 17:30:22 INFO  CpnToUnit:166 - -- 8 places;
+2019-11-12 17:30:22 INFO  CpnToUnit:167 - -- 8 transitions;
+2019-11-12 17:30:22 INFO  CpnToUnit:168 - -- 34 arcs.
+
+
+2019-11-12 17:30:23 INFO  CpnToUnit:50 - Output CPN: 
+2019-11-12 17:30:23 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 17:30:23 INFO  CpnToUnit:166 - -- 13 places;
+2019-11-12 17:30:23 INFO  CpnToUnit:167 - -- 22 transitions;
+2019-11-12 17:30:23 INFO  CpnToUnit:168 - -- 146 arcs.
+
+
+2019-11-12 17:30:23 INFO  CpnToUnit:52 - Output CPN created successfully
+2019-11-12 17:36:57 INFO  CpnToUnit:35 - Input CPN: 
+2019-11-12 17:36:57 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 17:36:57 INFO  CpnToUnit:166 - -- 8 places;
+2019-11-12 17:36:57 INFO  CpnToUnit:167 - -- 8 transitions;
+2019-11-12 17:36:57 INFO  CpnToUnit:168 - -- 34 arcs.
+
+
+2019-11-12 17:36:58 INFO  CpnToUnit:50 - Output CPN: 
+2019-11-12 17:36:58 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 17:36:58 INFO  CpnToUnit:166 - -- 13 places;
+2019-11-12 17:36:58 INFO  CpnToUnit:167 - -- 8 transitions;
+2019-11-12 17:36:58 INFO  CpnToUnit:168 - -- 32 arcs.
+
+
+2019-11-12 17:36:58 INFO  CpnToUnit:52 - Output CPN created successfully
+2019-11-12 17:37:56 INFO  CpnToUnit:35 - Input CPN: 
+2019-11-12 17:37:56 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 17:37:56 INFO  CpnToUnit:166 - -- 8 places;
+2019-11-12 17:37:56 INFO  CpnToUnit:167 - -- 8 transitions;
+2019-11-12 17:37:56 INFO  CpnToUnit:168 - -- 34 arcs.
+
+
+2019-11-12 17:37:57 INFO  CpnToUnit:50 - Output CPN: 
+2019-11-12 17:37:57 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 17:37:57 INFO  CpnToUnit:166 - -- 13 places;
+2019-11-12 17:37:57 INFO  CpnToUnit:167 - -- 22 transitions;
+2019-11-12 17:37:57 INFO  CpnToUnit:168 - -- 146 arcs.
+
+
+2019-11-12 17:37:57 INFO  CpnToUnit:52 - Output CPN created successfully
+2019-11-12 17:39:18 INFO  CpnToUnit:35 - Input CPN: 
+2019-11-12 17:39:18 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 17:39:18 INFO  CpnToUnit:166 - -- 8 places;
+2019-11-12 17:39:18 INFO  CpnToUnit:167 - -- 8 transitions;
+2019-11-12 17:39:18 INFO  CpnToUnit:168 - -- 34 arcs.
+
+
+2019-11-12 17:39:19 INFO  CpnToUnit:50 - Output CPN: 
+2019-11-12 17:39:19 INFO  CpnToUnit:165 - -- 2 pages;
+2019-11-12 17:39:19 INFO  CpnToUnit:166 - -- 13 places;
+2019-11-12 17:39:19 INFO  CpnToUnit:167 - -- 22 transitions;
+2019-11-12 17:39:19 INFO  CpnToUnit:168 - -- 146 arcs.
+
+
+2019-11-12 17:39:19 INFO  CpnToUnit:52 - Output CPN created successfully

@@ -6,6 +6,6 @@ import hlomozda.cpnunittransformer.cpn.ColoredPetriNet;
 
 public interface CpnGenerator {
 
-    public void generate(final ColoredPetriNet cpn, final OutputStream out);
+    void generate(final ColoredPetriNet cpn, final OutputStream out);
     
 }

@@ -3,6 +3,7 @@
 package hlomozda.cpnunittransformer.cpn;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 import hlomozda.cpnunittransformer.geom.Ellipse;
 import hlomozda.cpnunittransformer.geom.Point;
@@ -81,6 +82,10 @@ public class Place {
         this.name = name;
     }
 
+    public String getNameText() {
+        return name.getText();
+    }
+
     public Text getType() {
         return type;
     }
@@ -102,7 +107,13 @@ public class Place {
     public String toString() {
         return "(" + name.getText() + ": " + type.getText() + ", " + initMark.getText() + ")";
     }
-    
+
+    //ADDED BY DMYTRO HLOMOZDA
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
     //ADDED BY DMYTRO HLOMOZDA
     @Override
     public boolean equals(final Object other) {
@@ -120,16 +131,10 @@ public class Place {
         
         Place otherPlace = (Place) other;
         
-        return (this.getName().getText().equals(otherPlace.getName().getText()));
+        return (this.getNameText().equals(otherPlace.getNameText()));
     }
     
     //ADDED BY DMYTRO HLOMOZDA
-    public static Comparator<Place> PlaceNameComparator = new Comparator<Place>() {
-        
-        @Override
-        public int compare(Place p1, Place p2) {
-            return p1.name.getText().compareTo(p2.name.getText());
-        }
-    };
+    public static Comparator<Place> PlaceNameComparator = Comparator.comparing(Place::getNameText);
 
 }

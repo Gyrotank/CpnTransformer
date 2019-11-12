@@ -13,7 +13,7 @@ import hlomozda.cpnunittransformer.gfx.Text;
 public class Arc {
     
     //modified by Dmytro Hlomozda (added inhibitor orientation)
-    public enum Orientation { TO_TRANS, TO_PLACE, BOTH_DIR, INHIBITOR };
+    public enum Orientation { TO_TRANS, TO_PLACE, BOTH_DIR, INHIBITOR }
     
     private Place place;
     

@@ -3,6 +3,7 @@
 package hlomozda.cpnunittransformer.cpn;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 import hlomozda.cpnunittransformer.geom.Rectangle;
 import hlomozda.cpnunittransformer.gfx.Line;
@@ -63,6 +64,10 @@ public class Transition {
 
     public void setName(final Text name) {
         this.name = name;
+    }
+
+    public String getNameText() {
+        return name.getText();
     }
 
     public Rectangle getShape() {
@@ -126,6 +131,12 @@ public class Transition {
     public String toString() {
         return "[" + name.getText() + ": " + condition.getText() + ", " + code.getText() + "]";
     }
+
+    //ADDED BY DMYTRO HLOMOZDA
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
     
     //ADDED BY DMYTRO HLOMOZDA
     @Override
@@ -144,16 +155,10 @@ public class Transition {
         
         Transition otherTransition = (Transition) other;
         
-        return (this.getName().getText().equals(otherTransition.getName().getText()));
+        return (this.getNameText().equals(otherTransition.getNameText()));
     }
     
     //ADDED BY DMYTRO HLOMOZDA
-    public static Comparator<Transition> TransitionNameComparator = new Comparator<Transition>() {
-        
-        @Override
-        public int compare(Transition t1, Transition t2) {
-            return t1.name.getText().compareTo(t2.name.getText());
-        }
-    };
+    public static Comparator<Transition> TransitionNameComparator = Comparator.comparing(Transition::getNameText);
 
 }

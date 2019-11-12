@@ -55,7 +55,7 @@ public class Page {
     //ADDED BY DMYTRO HLOMOZDA
     public void setPlaces(final List<Place> places) {
         this.places.clear();
-        places.stream().forEach(this::addPlace);
+        places.forEach(this::addPlace);
     }
     
     public void addTransition(final Transition t) {
@@ -70,26 +70,26 @@ public class Page {
     
     //ADDED BY DMYTRO HLOMOZDA
     public void setTransitions(final List<Transition> transitions) {
-        this.transitions.clear();;
-        transitions.stream().forEach(this::addTransition);
+        this.transitions.clear();
+        transitions.forEach(this::addTransition);
     }
     
     public void addArc(final Arc arc) {
-        Pair<Place, Transition> key = new Pair<Place, Transition>(arc.getPlace(), arc.getTransition());
+        Pair<Place, Transition> key = new Pair<>(arc.getPlace(), arc.getTransition());
         if(!arcs.containsKey(key)) {
-            arcs.put(key, new ArrayList<Arc>());
+            arcs.put(key, new ArrayList<>());
         }
         arcs.get(key).add(arc);
     }
     
     public List<Arc> getArcs(final Place place, final Transition transition) {
-        return arcs.get(new Pair<Place, Transition>(place, transition));
+        return arcs.get(new Pair<>(place, transition));
     }
     
     //ADDED BY DMYTRO HLOMOZDA
     public void setArcs(final List<Arc> arcs) {
         this.arcs.clear();
-        arcs.stream().forEach(this::addArc);
+        arcs.forEach(this::addArc);
     }
     
     public int getArcsCount() {

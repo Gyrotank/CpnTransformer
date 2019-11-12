@@ -104,7 +104,7 @@ public class CpnXmlGenerator implements CpnGenerator {
     }
     
     private void generatePlaceXml(final Place place) {
-        placeIds.put(place.getName().getText(), idCounter);
+        placeIds.put(place.getNameText(), idCounter);
         
         generateLineSingleNlXml(String.format(TAG_PLACE_OPEN, String.valueOf(idCounter++)), 0);
         
@@ -121,7 +121,7 @@ public class CpnXmlGenerator implements CpnGenerator {
         generateLineSingleNlXml(TAG_FILLATTR_DEFAULT, 0);
         generateLineSingleNlXml(TAG_LINEATTR_DEFAULT, 0);
         generateLineSingleNlXml(TAG_TEXTATTR_DEFAULT, 0);
-        generateLineSingleNlXml(TAG_TEXT_OPEN + place.getName().getText() + TAG_TEXT_CLOSE, 0);
+        generateLineSingleNlXml(TAG_TEXT_OPEN + place.getNameText() + TAG_TEXT_CLOSE, 0);
         generateLineSingleNlXml(TAG_ELLIPSE_DEFAULT, 0);
         generateLineSingleNlXml(TAG_TOKEN_DEFAULT, 0);
     }
@@ -161,7 +161,7 @@ public class CpnXmlGenerator implements CpnGenerator {
     }
     
     private void generateTransitionXml(final Transition transition) {
-        transitionIds.put(transition.getName().getText(), idCounter);
+        transitionIds.put(transition.getNameText(), idCounter);
         
         generateLineSingleNlXml(String.format(TAG_TRANS_OPEN_DEFAULT, String.valueOf(idCounter++)), 0);
         
@@ -179,7 +179,7 @@ public class CpnXmlGenerator implements CpnGenerator {
         generateLineSingleNlXml(TAG_FILLATTR_DEFAULT, 0);
         generateLineSingleNlXml(TAG_LINEATTR_DEFAULT, 0);
         generateLineSingleNlXml(TAG_TEXTATTR_DEFAULT, 0);
-        generateLineSingleNlXml(TAG_TEXT_OPEN + transition.getName().getText() + TAG_TEXT_CLOSE, 0);
+        generateLineSingleNlXml(TAG_TEXT_OPEN + transition.getNameText() + TAG_TEXT_CLOSE, 0);
         generateLineSingleNlXml(TAG_BOX_DEFAULT, 0);
         generateLineSingleNlXml(TAG_BINDING_DEFAULT, 0);
     }
@@ -276,11 +276,11 @@ public class CpnXmlGenerator implements CpnGenerator {
     }
     
     private String getTransitionIdForArc(final Arc arc) {
-        return "ID" + transitionIds.get(arc.getTransition().getName().getText()).toString();
+        return "ID" + transitionIds.get(arc.getTransition().getNameText()).toString();
     }
     
     private String getPlaceIdForArc(final Arc arc) {
-        return "ID" + placeIds.get(arc.getPlace().getName().getText()).toString();
+        return "ID" + placeIds.get(arc.getPlace().getNameText()).toString();
     }    
     
     private void generateLineSingleNlXml(final String line, final int indentIncrement, final boolean isIdUsed) {

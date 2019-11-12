@@ -151,7 +151,7 @@ public class CpnUnitTransformer implements CpnTransformer {
 
             placeToInhibitedTransitionsMap.keySet().stream().forEach(place -> {
                 Place signalPlace = new Place(place);
-                signalPlace.getName().setText(signalPlace.getName().getText() + SIGNAL_FLAG);
+                signalPlace.getName().setText(signalPlace.getNameText() + SIGNAL_FLAG);
                 signalPlace.getShape()
                     .setPosition(new Point(signalPlace.getShape().getPosX(), 
                             signalPlace.getShape().getPosY() - CLONES_Y_STEP));
@@ -251,7 +251,7 @@ public class CpnUnitTransformer implements CpnTransformer {
 
             for (int i = 1; i < tokens.size(); i++) {
                 Place createdPlace = new Place(listPlace);                
-                createdPlace.getName().setText(createdPlace.getName().getText() + "_" + (i + 1) + UNFOLDED_FLAG);
+                createdPlace.getName().setText(createdPlace.getNameText() + "_" + (i + 1) + UNFOLDED_FLAG);
                 createdPlace.getShape()
                     .setPosition(new Point(createdPlace.getShape().getPosX(), 
                         createdPlace.getShape().getPosY() - CLONES_Y_STEP * i));
@@ -263,7 +263,7 @@ public class CpnUnitTransformer implements CpnTransformer {
                 unfoldedListPlaces.add(createdPlace);
             }
 
-            listPlace.getName().setText(listPlace.getName().getText() + "_1" + UNFOLDED_FLAG);
+            listPlace.getName().setText(listPlace.getNameText() + "_1" + UNFOLDED_FLAG);
             listPlace.getInitMark().setText(tokens.get(0));
             listPlace.getInitMark()
                 .setPosition(new Point(listPlace.getShape().getPosX(), 
@@ -339,13 +339,13 @@ public class CpnUnitTransformer implements CpnTransformer {
                 .map(arc -> arc.getTransition()).distinct().collect(Collectors.toList()));
                 
         for (Transition inputOutputTransition : inputOutputTransitions) {
-            if (!inputOutputTransition.getName().getText().contains(UNFOLDED_FLAG)) {
+            if (!inputOutputTransition.getNameText().contains(UNFOLDED_FLAG)) {
                 currentUnfoldedTransitionSet = new ArrayList<>();
                 
                 for (int i = 1; i <= createdPlaces.size(); i++) {
                     Transition createdTransition = new Transition(inputOutputTransition);                
                     createdTransition.getName()
-                        .setText(createdTransition.getName().getText() + "_" + (i + 1) + UNFOLDED_FLAG);
+                        .setText(createdTransition.getNameText() + "_" + (i + 1) + UNFOLDED_FLAG);
                     createdTransition.getShape()
                         .setPosition(new Point(createdTransition.getShape().getPosX(), 
                             createdTransition.getShape().getPosY() - CLONES_Y_STEP * i));
@@ -354,7 +354,7 @@ public class CpnUnitTransformer implements CpnTransformer {
                 }
 
                 inputOutputTransition.getName()
-                    .setText(inputOutputTransition.getName().getText() + "_1" + UNFOLDED_FLAG);                
+                    .setText(inputOutputTransition.getNameText() + "_1" + UNFOLDED_FLAG);
                 
                 originalArcs = 
                         arcsFromAndToPlace.stream()
@@ -371,8 +371,8 @@ public class CpnUnitTransformer implements CpnTransformer {
                 currentUnfoldedTransitionSet = new ArrayList<>();
                 currentUnfoldedTransitionSet.addAll(page.getTransitions().stream()
                     .filter(transition 
-                        -> transition.getName().getText()
-                            .contains(inputOutputTransition.getName().getText().replace("_1" + UNFOLDED_FLAG, "")))
+                        -> transition.getNameText()
+                            .contains(inputOutputTransition.getNameText().replace("_1" + UNFOLDED_FLAG, "")))
                     .collect(Collectors.toList()));
                 
                 originalArcs = 
@@ -431,11 +431,11 @@ public class CpnUnitTransformer implements CpnTransformer {
 
             for (Transition involvedTransition : involvedTransitions) {
                 for (Place involvedPlace : involvedPlaces) {
-                    String transitionIndex = involvedTransition.getName().getText()
-                            .substring(0, involvedTransition.getName().getText().indexOf(UNFOLDED_FLAG));
+                    String transitionIndex = involvedTransition.getNameText()
+                            .substring(0, involvedTransition.getNameText().indexOf(UNFOLDED_FLAG));
                     transitionIndex = transitionIndex.substring(transitionIndex.lastIndexOf("_") + 1);
-                    String placeIndex = involvedPlace.getName().getText()
-                            .substring(0, involvedPlace.getName().getText().indexOf(UNFOLDED_FLAG));
+                    String placeIndex = involvedPlace.getNameText()
+                            .substring(0, involvedPlace.getNameText().indexOf(UNFOLDED_FLAG));
                     placeIndex = placeIndex.substring(placeIndex.lastIndexOf("_") + 1);
 
                     if (!transitionIndex.equals(placeIndex)) {
@@ -500,25 +500,25 @@ public class CpnUnitTransformer implements CpnTransformer {
     private List<Arc> connectInputNonListPlacesWithUnfoldedTransitions (final Page page) {
         List<Transition> originalUnfoldedTransitions = 
                 page.getTransitions().stream()
-                .filter(tr -> tr.getName().getText().contains("_1" + UNFOLDED_FLAG))
+                .filter(tr -> tr.getNameText().contains("_1" + UNFOLDED_FLAG))
                 .collect(Collectors.toList());
         
         List<Arc> additionalArcs = new ArrayList<>();
         
         for (Transition oetr : originalUnfoldedTransitions) {
             String groupName = 
-                    oetr.getName().getText().substring(0, oetr.getName().getText().indexOf("_1" + UNFOLDED_FLAG));
+                    oetr.getNameText().substring(0, oetr.getNameText().indexOf("_1" + UNFOLDED_FLAG));
             
             List<Transition> createdUnfoldedTransitions = 
                     page.getTransitions().stream()
-                    .filter(tr -> tr.getName().getText().contains(groupName) 
-                            && !tr.getName().getText().contains("_1" + UNFOLDED_FLAG))
+                    .filter(tr -> tr.getNameText().contains(groupName)
+                            && !tr.getNameText().contains("_1" + UNFOLDED_FLAG))
                     .collect(Collectors.toList());
             
             List<Arc> originalArcsFromNonListPlaces = new ArrayList<>();
             
             originalArcsFromNonListPlaces.addAll(page.getPlaces().stream()
-                    .filter(place -> !place.getName().getText().contains(UNFOLDED_FLAG))
+                    .filter(place -> !place.getNameText().contains(UNFOLDED_FLAG))
                     .map(place -> page.getArcs(place, oetr))
                     .filter(Objects::nonNull)
                     .flatMap(listArcs -> listArcs.stream()).distinct()
@@ -579,7 +579,7 @@ public class CpnUnitTransformer implements CpnTransformer {
                     arc.getOrientation().equals(Arc.Orientation.TO_TRANS)
                     || arc.getOrientation().equals(Arc.Orientation.BOTH_DIR))
                 .map(arc -> arc.getTransition())
-                .filter(tr -> !tr.getName().getText().contains(UNFOLDED_FLAG))
+                .filter(tr -> !tr.getNameText().contains(UNFOLDED_FLAG))
                 .distinct().collect(Collectors.toList()));
         
         for (Transition outputTransition : outputTransitions) {
@@ -656,13 +656,13 @@ public class CpnUnitTransformer implements CpnTransformer {
      */
     private void cleanUp(final Page page) {        
         page.getPlaces().stream()
-            .forEach(p -> p.getName().setText(p.getName().getText().replace(UNFOLDED_FLAG, "")));
+            .forEach(p -> p.getName().setText(p.getNameText().replace(UNFOLDED_FLAG, "")));
         page.setPlaces(
                 page.getPlaces().stream().sorted(Place.PlaceNameComparator)
                     .collect(Collectors.toList()));
         
         page.getTransitions().stream()
-            .forEach(t -> t.getName().setText(t.getName().getText().replace(UNFOLDED_FLAG, "")));
+            .forEach(t -> t.getName().setText(t.getNameText().replace(UNFOLDED_FLAG, "")));
         page.setTransitions(
                 page.getTransitions().stream().sorted(Transition.TransitionNameComparator)
                     .collect(Collectors.toList()));

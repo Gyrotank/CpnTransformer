@@ -21,3 +21,32 @@ You can also run program with a single argument (name of the source file):
 In this case, the output file will be created named sourceFile_CpnToUnit.cpn.
 
 The program uses modified CPN parser originally written by Oleg Matsuk, which turns XML CPN representation into an object form.
+
+##Example:
+Input:
+\> java CpnToUnit resources\G1\G1.cpn
+
+Output:
+2019-11-13 13:34:53 INFO  CpnToUnit:37 - Input CPN:
+ 
+2019-11-13 13:34:53 INFO  CpnToUnit:167 - -- 2 pages;
+
+2019-11-13 13:34:53 INFO  CpnToUnit:168 - -- 8 places;
+
+2019-11-13 13:34:53 INFO  CpnToUnit:169 - -- 8 transitions;
+
+2019-11-13 13:34:53 INFO  CpnToUnit:170 - -- 34 arcs.
+
+
+2019-11-13 13:34:54 INFO  CpnToUnit:52 - Output CPN:
+ 
+2019-11-13 13:34:54 INFO  CpnToUnit:167 - -- 2 pages;
+
+2019-11-13 13:34:54 INFO  CpnToUnit:168 - -- 13 places;
+
+2019-11-13 13:34:54 INFO  CpnToUnit:169 - -- 22 transitions;
+
+2019-11-13 13:34:54 INFO  CpnToUnit:170 - -- 146 arcs.
+
+
+2019-11-13 13:34:54 INFO  CpnToUnit:54 - Output CPN created successfully

@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class VectorSpaceUtils {
+
+    private VectorSpaceUtils() {}
     
     //see http://www.mathbootcamps.com/determine-vector-linear-combination-vectors/
     //https://www.math.hmc.edu/calculus/tutorials/linearsystems/
@@ -107,6 +109,7 @@ public class VectorSpaceUtils {
                 for (int i = 0; i < row.length - 1; i++) {
                     if (row[i].compareTo(BigDecimal.ZERO) != 0) {
                         flag = false;
+                        break;
                     }                    
                 }
                 if (flag) {

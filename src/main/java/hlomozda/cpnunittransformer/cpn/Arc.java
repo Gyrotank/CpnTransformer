@@ -39,7 +39,7 @@ public class Arc {
         this.transition = other.getTransition();
         this.line = new Line(other.line.getColor(),
                 other.line.getThickness());
-        this.annotation = new Text(other.annotation.getText(),
+        this.annotation = new Text(other.annotation.getValue(),
                 other.annotation.getColor(),
                 new Point(other.annotation.getPosition().x(),
                         other.annotation.getPosition().y()));

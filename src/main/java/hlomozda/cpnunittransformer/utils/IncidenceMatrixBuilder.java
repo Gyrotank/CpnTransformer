@@ -15,9 +15,11 @@ import hlomozda.cpnunittransformer.cpn.Page;
  */
 public class IncidenceMatrixBuilder {
 
-    public static ArrayList<Integer[][]> buildMatrix(final ColoredPetriNet cpn) {
+    private IncidenceMatrixBuilder() {}
+
+    public static List<Integer[][]> buildMatrix(final ColoredPetriNet cpn) {
         ArrayList<Integer[][]> res = new ArrayList<>();
-        cpn.getPages().stream().forEach(page -> {
+        cpn.getPages().forEach(page -> {
             if (!page.getArcs().isEmpty()) {
                 res.add(buildMatrixForPage(page));
             }
@@ -44,7 +46,7 @@ public class IncidenceMatrixBuilder {
                         if (arc.getOrientation().equals(Arc.Orientation.TO_TRANS)) {
                             res[i][j]--;
                         }
-                    };
+                    }
                 }
             }
         }

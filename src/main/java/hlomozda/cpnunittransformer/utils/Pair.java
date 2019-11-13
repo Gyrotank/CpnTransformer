@@ -2,21 +2,21 @@
 
 package hlomozda.cpnunittransformer.utils;
 
-public class Pair<Left, Right> {
+public class Pair<L, R> {
 
-    private final Left left;
-    private final Right right;
+    private final L left;
+    private final R right;
 
-    public Pair(final Left left, final Right right) {
+    public Pair(final L left, final R right) {
         this.left = left;
         this.right = right;
     }
 
-    public Left getLeft() {
+    public L getLeft() {
         return left;
     }
 
-    public Right getRight() {
+    public R getRight() {
         return right;
     }
 

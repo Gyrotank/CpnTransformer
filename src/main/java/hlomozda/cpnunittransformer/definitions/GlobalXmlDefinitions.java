@@ -4,8 +4,8 @@ import static hlomozda.cpnunittransformer.definitions.CpnMlDefinitions.*;
 
 public final class GlobalXmlDefinitions implements XmlDefinitions {
     
-    public static final String _DOUBLE_NEWLINE = System.lineSeparator() + System.lineSeparator();
-    public static final String _INDENTATION = "    ";
+    public static final String DOUBLE_NEWLINE = System.lineSeparator() + System.lineSeparator();
+    public static final String INDENTATION = "    ";
     
     public static final String GENERATOR = "<generator tool=\"CPN Tools\" version=\"" + CPN_TOOLS_VERSION + "\" format=\"6\"/>";
     

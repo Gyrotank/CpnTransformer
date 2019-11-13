@@ -1,9 +1,12 @@
 package hlomozda.cpnunittransformer.tss;
 
-import hlomozda.cpnunittransformer.utils.VectorSpaceUtils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import hlomozda.cpnunittransformer.utils.VectorSpaceUtils;
+
+import org.apache.log4j.Logger;
 
 /**
  * A finder of truncated set of solutions (TSS) for 
@@ -16,6 +19,8 @@ import java.util.Arrays;
  *
  */
 public class CpnTssFinder {
+
+    private static final Logger logger = Logger.getLogger(CpnTssFinder.class);
     
     private final Integer[][] incidenceMatrix;
     
@@ -28,10 +33,8 @@ public class CpnTssFinder {
                 new Integer[equationsNumber][equationsSize];
         
         for (int i = 0; i < equationsNumber; i++)
-            for (int j = 0; j < equationsSize; j++) {
-                incidenceMatrix[i][j] = inputIncidenceMatrix[i][j];
-            }
-        
+            incidenceMatrix[i] = Arrays.copyOf(inputIncidenceMatrix[i], inputIncidenceMatrix[i].length);
+
         int equationsNumberTransposed = inputIncidenceMatrix[0].length;
         int equationsSizeTransposed = inputIncidenceMatrix.length;
         incidenceMatrixTransposed = 
@@ -43,15 +46,15 @@ public class CpnTssFinder {
             }
     }
     
-    public ArrayList<Integer[]> tssForIncidenceMatrix() {        
+    public List<Integer[]> tssForIncidenceMatrix() {
         return tssForMatrix(incidenceMatrix);
     }
     
-    public ArrayList<Integer[]> tssForTransposedIncidenceMatrix() {        
+    public List<Integer[]> tssForTransposedIncidenceMatrix() {
         return tssForMatrix(incidenceMatrixTransposed);
     }
     
-    private ArrayList<Integer[]> tssForMatrix(final Integer[][] inputMatrix) {
+    private List<Integer[]> tssForMatrix(final Integer[][] inputMatrix) {
         int equationsNumber = inputMatrix.length;
         int equationsSize = inputMatrix[0].length;
         
@@ -68,7 +71,7 @@ public class CpnTssFinder {
                 }
             }
             
-            System.out.println("Building TSS for vector " + (p + 1) 
+            logger.info("Building TSS for vector " + (p + 1)
                     + "; there are " + basisVectors.size() + " basis vectors");
             
             ArrayList<Integer[]> mZero = new ArrayList<>();

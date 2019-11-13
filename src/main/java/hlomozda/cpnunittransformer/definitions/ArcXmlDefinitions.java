@@ -1,7 +1,7 @@
 package hlomozda.cpnunittransformer.definitions;
 
 public class ArcXmlDefinitions implements XmlDefinitions {
-    
+
     public static final String ORIENTATION_BIDIRECTIONAL = "BOTHDIR";
     public static final String ORIENTATION_PLACE_TO_TRANSITION = "PtoT";
     public static final String ORIENTATION_TRANSITION_TO_PLACE = "TtoP";
@@ -19,4 +19,7 @@ public class ArcXmlDefinitions implements XmlDefinitions {
     public static final String TAG_PLACEEND = "<placeend idref=\"%s\"/>";
     
     public static final String TAG_TRANSEND = "<transend idref=\"%s\"/>";
+
+    private ArcXmlDefinitions() {
+    }
 }

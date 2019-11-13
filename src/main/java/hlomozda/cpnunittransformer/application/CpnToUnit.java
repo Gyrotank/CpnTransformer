@@ -28,6 +28,8 @@ public class CpnToUnit {
     private static final Logger logger = Logger.getLogger(CpnToUnit.class);
 
     public static void main(final String[] args) throws IOException {
+        System.setProperty("javax.xml.accessExternalDTD", "http");
+
         InputStream in = new FileInputStream(args[0]);
         CpnParser parser = new DomCpnParser();
         ColoredPetriNet inputCpn = parser.parse(in);
@@ -79,7 +81,7 @@ public class CpnToUnit {
                                             public void accept(Place place) {
                                                 try {
                                                     outCpnNetTssReport.write(((i++) + " # "
-                                                            + place.getNameText().replace("\n", " ")
+                                                            + place.getNameValue().replace("\n", " ")
                                                             + System.lineSeparator()).getBytes());
                                                 } catch (Exception e) {
                                                     logger.error(e);
@@ -96,7 +98,7 @@ public class CpnToUnit {
                                             public void accept(Transition transition) {
                                                 try {
                                                     outCpnNetTssReport.write(((i++) + " # "
-                                                            + transition.getNameText().replace("\n", " ")
+                                                            + transition.getNameValue().replace("\n", " ")
                                                             + System.lineSeparator()).getBytes());
                                                 } catch (Exception e) {
                                                     logger.error(e);

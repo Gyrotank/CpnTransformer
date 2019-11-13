@@ -6,30 +6,30 @@ import hlomozda.cpnunittransformer.geom.Point;
 
 public class Text {
     
-    private String text;
+    private String value;
     
     private String color;
     
     private Point position;
-
-    public String getText() {
-        return text;
-    }
     
     public Text() {}
 
-    public Text(final String text, final String color, final Point pos) {
-        this.text = text;
+    public Text(final String value, final String color) {
+        this(value, color, null);
+    }
+
+    public Text(final String value, final String color, final Point pos) {
+        this.value = value;
         this.color = color;
         this.position = pos;
     }
 
-    public Text(final String text, final String color){
-        this(text, color, null);
+    public String getValue() {
+        return value;
     }
     
-    public void setText(final String text) {
-        this.text = text;
+    public void setValue(final String value) {
+        this.value = value;
     }
     
     public String getColor() {

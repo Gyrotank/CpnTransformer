@@ -4,7 +4,8 @@ package hlomozda.cpnunittransformer.geom;
 
 public class Segment {
 
-    private Point a, b;
+    private Point a;
+    private Point b;
 
     public Segment(final Point a, final Point b) {
         this.setA(a);
@@ -41,7 +42,7 @@ public class Segment {
         return Math.sqrt(Math.pow(a.x() - b.x(), 2) + Math.pow(a.y() - b.y(), 2));
     }
     
-    public Point vector() {
+    private Point vector() {
         Point vector = new Point(b.x() - a.x(), b.y() - a.y());
         //normalize the vector
         double len = (new Segment(new Point(), vector)).length();
@@ -49,7 +50,7 @@ public class Segment {
         return vector;
     }
     
-    public Point normal() {
+    private Point normal() {
         Point vector = vector();
         return new Point(-vector.y(), vector.x());
     }

@@ -18,9 +18,7 @@ public class CpnShldiSolverBf implements CpnShldiSolver {
                 new Integer[equationsNumber][equationsSize];
         
         for (int i = 0; i < equationsNumber; i++)
-            for (int j = 0; j < equationsSize; j++) {
-                systemMatrix[i][j] = inputSystemMatrix[i][j];
-            }
+            systemMatrix[i] = Arrays.copyOf(inputSystemMatrix[i], inputSystemMatrix[i].length);
     }
 
     @Override
@@ -149,19 +147,16 @@ public class CpnShldiSolverBf implements CpnShldiSolver {
     }
     
     private long count1s(final Integer[] vector) {
-        return Arrays.asList(vector).stream().filter(element -> element == 1).count();
+        return Arrays.stream(vector).filter(element -> element == 1).count();
     }
     
     private boolean isFilledWith1s(final Integer[] vector) {
-        return Arrays.asList(vector).stream().allMatch(element -> element == 1);
+        return Arrays.stream(vector).allMatch(element -> element == 1);
     }
     
     private Integer[] incrementVector(final Integer[] vector) {
-        Integer[] result = new Integer[vector.length];
-        Arrays.fill(result, 0);
-        for (int i = 0; i < result.length; i++) {
-            result[i] = vector[i];
-        }
+        Integer[] result =  Arrays.copyOf(vector, vector.length);
+
         if (result[0] == 0) {
             result[0] = 1;
             return result;

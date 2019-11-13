@@ -4,7 +4,8 @@ package hlomozda.cpnunittransformer.geom;
 
 public class Shape {
     
-    private double width, height;
+    private double width;
+    private double height;
     
     private Point position;
     

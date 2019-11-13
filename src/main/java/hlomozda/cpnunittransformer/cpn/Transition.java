@@ -41,19 +41,19 @@ public class Transition {
         this.line = new Line(other.line.getColor(),
                 other.line.getThickness());
         this.fill = other.fill;
-        this.name = new Text(other.name.getText(),
+        this.name = new Text(other.name.getValue(),
                 other.name.getColor(), 
                 null);
-        this.condition = new Text(other.condition.getText(),
+        this.condition = new Text(other.condition.getValue(),
                 other.condition.getColor(), 
                 null);
-        this.time = new Text(other.time.getText(),
+        this.time = new Text(other.time.getValue(),
                 other.time.getColor(), 
                 null);
-        this.code = new Text(other.code.getText(),
+        this.code = new Text(other.code.getValue(),
                 other.code.getColor(), 
                 null);
-        this.priority = new Text(other.priority.getText(),
+        this.priority = new Text(other.priority.getValue(),
                 other.priority.getColor(), 
                 null);
     }
@@ -66,8 +66,8 @@ public class Transition {
         this.name = name;
     }
 
-    public String getNameText() {
-        return name.getText();
+    public String getNameValue() {
+        return name.getValue();
     }
 
     public Rectangle getShape() {
@@ -129,7 +129,7 @@ public class Transition {
     //ADDED BY DMYTRO HLOMOZDA
     @Override
     public String toString() {
-        return "[" + name.getText() + ": " + condition.getText() + ", " + code.getText() + "]";
+        return "[" + name.getValue() + ": " + condition.getValue() + ", " + code.getValue() + "]";
     }
 
     //ADDED BY DMYTRO HLOMOZDA
@@ -155,10 +155,10 @@ public class Transition {
         
         Transition otherTransition = (Transition) other;
         
-        return (this.getNameText().equals(otherTransition.getNameText()));
+        return (this.getNameValue().equals(otherTransition.getNameValue()));
     }
     
     //ADDED BY DMYTRO HLOMOZDA
-    public static Comparator<Transition> TransitionNameComparator = Comparator.comparing(Transition::getNameText);
+    public static final Comparator<Transition> TransitionNameComparator = Comparator.comparing(Transition::getNameValue);
 
 }

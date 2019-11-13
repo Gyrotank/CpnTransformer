@@ -5,20 +5,21 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CpnTssFinderRunner {
-    
-    private static final int OUTPUT_QTY = 100; 
+
+    private static final int OUTPUT_QTY = 100;
+
+    private CpnTssFinderRunner() {
+    }
 
     public static List<String> findAndOutputSolution(final Integer[][] inputIncidenceMatrix) {
+
         ArrayList<String> output = new ArrayList<>();
         
-        ArrayList<Integer[]> result = new ArrayList<>();
-        ArrayList<Integer[]> resultTransposed = new ArrayList<>();
-        
         CpnTssFinder ctf = new CpnTssFinder(inputIncidenceMatrix);
-        
-        result = ctf.tssForIncidenceMatrix();
-        
-        resultTransposed = ctf.tssForTransposedIncidenceMatrix();
+
+        List<Integer[]> result = ctf.tssForIncidenceMatrix();
+
+        List<Integer[]> resultTransposed = ctf.tssForTransposedIncidenceMatrix();
         
         output.add("================================");
                 
@@ -38,9 +39,9 @@ public class CpnTssFinderRunner {
             }
         }
         output.add("All-zero columns: ");
-        output.add(ZeroColumns(result).isEmpty() 
+        output.add(zeroColumns(result).isEmpty()
                 ? "none; PN is repeatable" 
-                        : ZeroColumns(result).toString() + "; PN is not repeatable");        
+                        : zeroColumns(result).toString() + "; PN is not repeatable");
         output.add("=======================");
         output.add("There are " + resultTransposed.size() + " S-invariants");
         if (resultTransposed.size() <= OUTPUT_QTY) {
@@ -54,17 +55,17 @@ public class CpnTssFinderRunner {
         }
         output.add("=======================");
         output.add("All-zero columns: ");
-        output.add(ZeroColumns(resultTransposed).isEmpty() 
+        output.add(zeroColumns(resultTransposed).isEmpty()
                 ? "none; PN is bounded" 
-                        : ZeroColumns(result).toString() + "; PN is unbounded");
+                        : zeroColumns(result).toString() + "; PN is unbounded");
         return output;
     }
     
-    private static List<Integer> ZeroColumns(List<Integer[]> vectors) { 
+    private static List<Integer> zeroColumns(List<Integer[]> vectors) {
         List<Integer> result = new ArrayList<>();
         
         for (int i = 0; i < vectors.get(0).length; i++) {
-            boolean flag = false;            
+            boolean flag;
             if (vectors.get(0)[i] == 0) {
                 flag = true;
                 for (Integer[] row : vectors) {

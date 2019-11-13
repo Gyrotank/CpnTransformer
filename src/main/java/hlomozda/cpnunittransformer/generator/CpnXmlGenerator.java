@@ -10,14 +10,19 @@ import hlomozda.cpnunittransformer.cpn.ColoredPetriNet;
 import hlomozda.cpnunittransformer.cpn.Page;
 import hlomozda.cpnunittransformer.cpn.Place;
 import hlomozda.cpnunittransformer.cpn.Transition;
+import hlomozda.cpnunittransformer.definitions.XmlDefinitions;
+
+import org.apache.log4j.Logger;
+
 import static hlomozda.cpnunittransformer.definitions.ArcXmlDefinitions.*;
 import static hlomozda.cpnunittransformer.definitions.GlobalXmlDefinitions.*;
 import static hlomozda.cpnunittransformer.definitions.PageXmlDefinitions.*;
 import static hlomozda.cpnunittransformer.definitions.PlaceXmlDefinitions.*;
 import static hlomozda.cpnunittransformer.definitions.TransitionXmlDefinitions.*;
-import static hlomozda.cpnunittransformer.definitions.XmlDefinitions.*;
 
 public class CpnXmlGenerator implements CpnGenerator {
+
+    private static final Logger logger = Logger.getLogger(CpnXmlGenerator.class);
     
     private OutputStream mOut;
     private int idCounter = 1;
@@ -49,7 +54,7 @@ public class CpnXmlGenerator implements CpnGenerator {
         
         generateGlobBoxXml(cpn);        
         
-        cpn.getPages().stream().forEach(this::generatePageXml);
+        cpn.getPages().forEach(this::generatePageXml);
         
         generateLineSingleNlXml(TAG_CPNET_CLOSE, -1);
         generateLineSingleNlXml(TAG_WORKSPACEELEMENTS_CLOSE, -1);            
@@ -58,7 +63,7 @@ public class CpnXmlGenerator implements CpnGenerator {
     private void generateGlobBoxXml(final ColoredPetriNet cpn) {
         generateLineSingleNlXml(TAG_GLOBBOX_OPEN, 1);
         
-        generateLineSingleNlXml(TAG_BLOCK_OPEN, 1, true);
+        generateLineSingleNlXml();
         generateLineSingleNlXml(ID_STANDARD_DECLARATIONS, 1);        
         cpn.getDeclarations().stream().filter(s -> s.contains(KEYWORD_COLSET)).forEach(this::generateColorXml);
         cpn.getDeclarations().stream().filter(s -> s.contains(KEYWORD_VAR)).forEach(this::generateVarXml);        
@@ -71,11 +76,14 @@ public class CpnXmlGenerator implements CpnGenerator {
         generateLineSingleNlXml(String.format(TAG_VAR_OPEN, String.valueOf(idCounter++)), 0);
         
         String[] splitString = varDeclaration.split("( )|(:)|(;)");
-        generateLineSingleNlXml(createOpenTag(KEYWORD_TYPE), 1);
-        generateLineSingleNlXml(createOpenTag(KEYWORD_ID) + splitString[2].toUpperCase() + createCloseTag(KEYWORD_ID), 1);
-        generateLineSingleNlXml(createCloseTag(KEYWORD_TYPE), -1);
-        generateLineSingleNlXml(createOpenTag(KEYWORD_ID) + splitString[1].toLowerCase() + createCloseTag(KEYWORD_ID), 0);
-        generateLineSingleNlXml(createOpenTag(KEYWORD_LAYOUT) + varDeclaration + createCloseTag(KEYWORD_LAYOUT), 0);
+        generateLineSingleNlXml(XmlDefinitions.createOpenTag(KEYWORD_TYPE), 1);
+        generateLineSingleNlXml(XmlDefinitions.createOpenTag(KEYWORD_ID) + splitString[2].toUpperCase()
+                + XmlDefinitions.createCloseTag(KEYWORD_ID), 1);
+        generateLineSingleNlXml(XmlDefinitions.createCloseTag(KEYWORD_TYPE), -1);
+        generateLineSingleNlXml(XmlDefinitions.createOpenTag(KEYWORD_ID) + splitString[1].toLowerCase()
+                + XmlDefinitions.createCloseTag(KEYWORD_ID), 0);
+        generateLineSingleNlXml(XmlDefinitions.createOpenTag(KEYWORD_LAYOUT) + varDeclaration
+                + XmlDefinitions.createCloseTag(KEYWORD_LAYOUT), 0);
         
         generateLineSingleNlXml(TAG_VAR_CLOSE, -1);
     }
@@ -84,9 +92,11 @@ public class CpnXmlGenerator implements CpnGenerator {
         String[] colsetDeclarationSplit = colsetDeclaration.split("( )|(;)");
         generateLineSingleNlXml(String.format(TAG_COLOR_OPEN, String.valueOf(idCounter++)), 0);
         
-        generateLineSingleNlXml(createOpenTag(KEYWORD_ID) + colsetDeclarationSplit[1] + createCloseTag(KEYWORD_ID), 1);
-        generateLineSingleNlXml(createFullTag(colsetDeclarationSplit[3]), 0);
-        generateLineSingleNlXml(createOpenTag(KEYWORD_LAYOUT) + colsetDeclaration + createCloseTag(KEYWORD_LAYOUT), 0);
+        generateLineSingleNlXml(XmlDefinitions.createOpenTag(KEYWORD_ID) + colsetDeclarationSplit[1]
+                + XmlDefinitions.createCloseTag(KEYWORD_ID), 1);
+        generateLineSingleNlXml(XmlDefinitions.createFullTag(colsetDeclarationSplit[3]), 0);
+        generateLineSingleNlXml(XmlDefinitions.createOpenTag(KEYWORD_LAYOUT) + colsetDeclaration +
+                XmlDefinitions.createCloseTag(KEYWORD_LAYOUT), 0);
         
         generateLineSingleNlXml(TAG_COLOR_CLOSE, -1);
     }
@@ -95,16 +105,16 @@ public class CpnXmlGenerator implements CpnGenerator {
         generateLineSingleNlXml(String.format(TAG_PAGE_OPEN, String.valueOf(idCounter++)), 0);
         generateLineSingleNlXml(String.format(TAG_PAGEATTR, page.getName()), 1);
         
-        page.getPlaces().stream().forEach(this::generatePlaceXml);
-        page.getTransitions().stream().forEach(this::generateTransitionXml);
-        page.getArcs().stream().forEach(this::generateArcXml);
+        page.getPlaces().forEach(this::generatePlaceXml);
+        page.getTransitions().forEach(this::generateTransitionXml);
+        page.getArcs().forEach(this::generateArcXml);
         
-        generateLineSingleNlXml(createFullTag(KEYWORD_CONSTRAINTS), 0);
+        generateLineSingleNlXml(XmlDefinitions.createFullTag(KEYWORD_CONSTRAINTS), 0);
         generateLineSingleNlXml(TAG_PAGE_CLOSE, -1);
     }
     
     private void generatePlaceXml(final Place place) {
-        placeIds.put(place.getNameText(), idCounter);
+        placeIds.put(place.getNameValue(), idCounter);
         
         generateLineSingleNlXml(String.format(TAG_PLACE_OPEN, String.valueOf(idCounter++)), 0);
         
@@ -121,7 +131,7 @@ public class CpnXmlGenerator implements CpnGenerator {
         generateLineSingleNlXml(TAG_FILLATTR_DEFAULT, 0);
         generateLineSingleNlXml(TAG_LINEATTR_DEFAULT, 0);
         generateLineSingleNlXml(TAG_TEXTATTR_DEFAULT, 0);
-        generateLineSingleNlXml(TAG_TEXT_OPEN + place.getNameText() + TAG_TEXT_CLOSE, 0);
+        generateLineSingleNlXml(TAG_TEXT_OPEN + place.getNameValue() + TAG_TEXT_CLOSE, 0);
         generateLineSingleNlXml(TAG_ELLIPSE_DEFAULT, 0);
         generateLineSingleNlXml(TAG_TOKEN_DEFAULT, 0);
     }
@@ -141,7 +151,7 @@ public class CpnXmlGenerator implements CpnGenerator {
         generateLineSingleNlXml(TAG_FILLATTR_DEFAULT, 0);
         generateLineSingleNlXml(TAG_LINEATTR_DEFAULT, 0);
         generateLineSingleNlXml(TAG_TEXTATTR_DEFAULT, 0);
-        generateLineSingleNlXml(TAG_TEXT_TOOL_OPEN + place.getType().getText() + TAG_TEXT_CLOSE, 0);
+        generateLineSingleNlXml(TAG_TEXT_TOOL_OPEN + place.getType().getValue() + TAG_TEXT_CLOSE, 0);
         
         generateLineSingleNlXml(TAG_TYPE_CLOSE, -1);
     }
@@ -154,14 +164,14 @@ public class CpnXmlGenerator implements CpnGenerator {
         generateLineSingleNlXml(TAG_LINEATTR_DEFAULT, 0);
         generateLineSingleNlXml(TAG_TEXTATTR_DEFAULT, 0);
         generateLineSingleNlXml(TAG_TEXT_TOOL_OPEN + 
-                (place.getInitMark().getText().isEmpty() ? "" : place.getInitMark().getText()) 
+                (place.getInitMark().getValue().isEmpty() ? "" : place.getInitMark().getValue())
                 + TAG_TEXT_CLOSE, 0);
         
         generateLineSingleNlXml(TAG_INITMARK_CLOSE, -1);
     }
     
     private void generateTransitionXml(final Transition transition) {
-        transitionIds.put(transition.getNameText(), idCounter);
+        transitionIds.put(transition.getNameValue(), idCounter);
         
         generateLineSingleNlXml(String.format(TAG_TRANS_OPEN_DEFAULT, String.valueOf(idCounter++)), 0);
         
@@ -179,7 +189,7 @@ public class CpnXmlGenerator implements CpnGenerator {
         generateLineSingleNlXml(TAG_FILLATTR_DEFAULT, 0);
         generateLineSingleNlXml(TAG_LINEATTR_DEFAULT, 0);
         generateLineSingleNlXml(TAG_TEXTATTR_DEFAULT, 0);
-        generateLineSingleNlXml(TAG_TEXT_OPEN + transition.getNameText() + TAG_TEXT_CLOSE, 0);
+        generateLineSingleNlXml(TAG_TEXT_OPEN + transition.getNameValue() + TAG_TEXT_CLOSE, 0);
         generateLineSingleNlXml(TAG_BOX_DEFAULT, 0);
         generateLineSingleNlXml(TAG_BINDING_DEFAULT, 0);
     }
@@ -270,33 +280,33 @@ public class CpnXmlGenerator implements CpnGenerator {
         generateLineSingleNlXml(TAG_FILLATTR_DEFAULT, 0);
         generateLineSingleNlXml(TAG_LINEATTR_DEFAULT, 0);
         generateLineSingleNlXml(TAG_TEXTATTR_DEFAULT, 0);
-        generateLineSingleNlXml(TAG_TEXT_TOOL_OPEN + arc.getAnnotation().getText() + TAG_TEXT_CLOSE, 0);
+        generateLineSingleNlXml(TAG_TEXT_TOOL_OPEN + arc.getAnnotation().getValue() + TAG_TEXT_CLOSE, 0);
         
         generateLineSingleNlXml(TAG_ANNOT_CLOSE, -1);
     }
     
     private String getTransitionIdForArc(final Arc arc) {
-        return "ID" + transitionIds.get(arc.getTransition().getNameText()).toString();
+        return "ID" + transitionIds.get(arc.getTransition().getNameValue()).toString();
     }
     
     private String getPlaceIdForArc(final Arc arc) {
-        return "ID" + placeIds.get(arc.getPlace().getNameText()).toString();
+        return "ID" + placeIds.get(arc.getPlace().getNameValue()).toString();
     }    
     
-    private void generateLineSingleNlXml(final String line, final int indentIncrement, final boolean isIdUsed) {
-        generateLineSingleNlXml(String.format(line, String.valueOf(idCounter++)), indentIncrement);
+    private void generateLineSingleNlXml() {
+        generateLineSingleNlXml(String.format(TAG_BLOCK_OPEN, String.valueOf(idCounter++)), 1);
     }
     
     private void generateLineSingleNlXml(final String line, final int indentIncrement) {
         indentationCounter += indentIncrement;
         try {
             for (int i = 0; i < indentationCounter; i++) {
-                mOut.write(_INDENTATION.getBytes());
+                mOut.write(INDENTATION.getBytes());
             }
             mOut.write(line.getBytes());
             mOut.write(System.lineSeparator().getBytes());
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e);
         }        
     }
     
@@ -309,12 +319,12 @@ public class CpnXmlGenerator implements CpnGenerator {
         indentationCounter += indentIncrement;
         try {
             for (int i = 0; i < indentationCounter; i++) {
-                mOut.write(_INDENTATION.getBytes());
+                mOut.write(INDENTATION.getBytes());
             }
             mOut.write(line.getBytes());
-            mOut.write(_DOUBLE_NEWLINE.getBytes());
+            mOut.write(DOUBLE_NEWLINE.getBytes());
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
     

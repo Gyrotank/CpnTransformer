@@ -4,7 +4,8 @@ package hlomozda.cpnunittransformer.geom;
 
 public class Point {
     
-    private double x, y;
+    private double x;
+    private double y;
     
     public Point() {}
 

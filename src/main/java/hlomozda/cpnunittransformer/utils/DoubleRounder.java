@@ -7,10 +7,12 @@ import java.math.RoundingMode;
 
 public class DoubleRounder {
 
+    private DoubleRounder() {}
+
     public static double round(final double value, final int places) {
         if (places < 0) throw new IllegalArgumentException();
 
-        BigDecimal bd = new BigDecimal(value);
+        BigDecimal bd = BigDecimal.valueOf(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }

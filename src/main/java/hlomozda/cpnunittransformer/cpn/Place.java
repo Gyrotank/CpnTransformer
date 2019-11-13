@@ -37,14 +37,14 @@ public class Place {
         this.line = new Line(other.line.getColor(),
                 other.line.getThickness());
         this.fill = other.fill;
-        this.name = new Text(other.name.getText(),
+        this.name = new Text(other.name.getValue(),
                 other.name.getColor(), 
                 null);
-        this.type = new Text(other.type.getText(),
+        this.type = new Text(other.type.getValue(),
                 other.type.getColor(),
                 new Point(other.type.getPosition().x(),
                         other.type.getPosition().y()));
-        this.initMark = new Text(other.initMark.getText(),
+        this.initMark = new Text(other.initMark.getValue(),
                 other.initMark.getColor(),
                 new Point(other.initMark.getPosition().x(),
                         other.initMark.getPosition().y()));
@@ -82,8 +82,8 @@ public class Place {
         this.name = name;
     }
 
-    public String getNameText() {
-        return name.getText();
+    public String getNameValue() {
+        return name.getValue();
     }
 
     public Text getType() {
@@ -105,7 +105,7 @@ public class Place {
     //ADDED BY DMYTRO HLOMOZDA
     @Override
     public String toString() {
-        return "(" + name.getText() + ": " + type.getText() + ", " + initMark.getText() + ")";
+        return "(" + name.getValue() + ": " + type.getValue() + ", " + initMark.getValue() + ")";
     }
 
     //ADDED BY DMYTRO HLOMOZDA
@@ -131,10 +131,10 @@ public class Place {
         
         Place otherPlace = (Place) other;
         
-        return (this.getNameText().equals(otherPlace.getNameText()));
+        return (this.getNameValue().equals(otherPlace.getNameValue()));
     }
     
     //ADDED BY DMYTRO HLOMOZDA
-    public static Comparator<Place> PlaceNameComparator = Comparator.comparing(Place::getNameText);
+    public static final Comparator<Place> PlaceNameComparator = Comparator.comparing(Place::getNameValue);
 
 }

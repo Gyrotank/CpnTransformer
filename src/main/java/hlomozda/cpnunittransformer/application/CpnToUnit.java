@@ -30,27 +30,30 @@ public class CpnToUnit {
     public static void main(final String[] args) throws IOException {
         System.setProperty("javax.xml.accessExternalDTD", "http");
 
-        InputStream in = new FileInputStream(args[0]);
-        CpnParser parser = new DomCpnParser();
-        ColoredPetriNet inputCpn = parser.parse(in);
+        ColoredPetriNet cpn;
+
+        try (InputStream in = new FileInputStream(args[0])) {
+            CpnParser parser = new DomCpnParser();
+            cpn = parser.parse(in);
+        }
 
         logger.info("Input CPN: ");
-        printCpnInfo(inputCpn);
+        printCpnInfo(cpn);
 
         CpnTransformer transformer = new CpnUnitTransformer();
         CpnGenerator cut = new CpnXmlGenerator();
-        ColoredPetriNet outputCpn = transformer.transform(inputCpn);
+        transformer.transform(cpn);
         OutputStream outCpnNet;
         if (args.length == 1) {
             outCpnNet = new FileOutputStream(args[0].substring(0, args[0].lastIndexOf('.')) + "_CpnToUnit.cpn");
         } else {
             outCpnNet = new FileOutputStream(args[1]);
         }
-        cut.generate(outputCpn, outCpnNet);
+        cut.generate(cpn, outCpnNet);
         outCpnNet.close();
 
         logger.info("Output CPN: ");
-        printCpnInfo(outputCpn);
+        printCpnInfo(cpn);
         logger.info("Output CPN created successfully");
 
         if (reportToBeGenerated(args)) {
@@ -70,11 +73,11 @@ public class CpnToUnit {
                 outCpnNetTssReport.write("=====================".getBytes());
                 outCpnNetTssReport.write(System.lineSeparator().getBytes());
 
-                List<Integer[][]> matricesForPage = IncidenceMatrixBuilder.buildMatrix(outputCpn);
+                List<Integer[][]> matricesForPage = IncidenceMatrixBuilder.buildMatrix(cpn);
                 matricesForPage.forEach(matrixForPage -> {
                             try {
                                 outCpnNetTssReport.write(("Places:" + System.lineSeparator()).getBytes());
-                                outputCpn.getPages().get(matricesForPage.lastIndexOf(matrixForPage)).getPlaces()
+                                cpn.getPages().get(matricesForPage.lastIndexOf(matrixForPage)).getPlaces()
                                         .forEach(new Consumer<Place>() {
                                             int i = 1;
 
@@ -91,7 +94,7 @@ public class CpnToUnit {
                                 outCpnNetTssReport.write(System.lineSeparator().getBytes());
 
                                 outCpnNetTssReport.write(("Transitions:" + System.lineSeparator()).getBytes());
-                                outputCpn.getPages().get(matricesForPage.lastIndexOf(matrixForPage)).getTransitions()
+                                cpn.getPages().get(matricesForPage.lastIndexOf(matrixForPage)).getTransitions()
                                         .forEach(new Consumer<Transition>() {
                                             int i = 1;
 

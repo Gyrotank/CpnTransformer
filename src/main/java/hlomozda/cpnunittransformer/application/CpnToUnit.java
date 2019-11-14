@@ -44,7 +44,7 @@ public class CpnToUnit {
         CpnGenerator cut = new CpnXmlGenerator();
         transformer.transform(cpn);
         OutputStream outCpnNet;
-        if (args.length == 1) {
+        if (args.length == 1 || (reportToBeGenerated(args) && args.length == 2)) {
             outCpnNet = new FileOutputStream(args[0].substring(0, args[0].lastIndexOf('.')) + "_CpnToUnit.cpn");
         } else {
             outCpnNet = new FileOutputStream(args[1]);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import hlomozda.cpnunittransformer.utils.VectorSpaceUtils;
+import hlomozda.cpnio.utils.VectorSpaceUtils;
 
 import org.apache.log4j.Logger;
 

@@ -8,18 +8,18 @@ import java.io.OutputStream;
 import java.util.List;
 import java.util.function.Consumer;
 
-import hlomozda.cpnunittransformer.cpn.ColoredPetriNet;
-import hlomozda.cpnunittransformer.cpn.Page;
-import hlomozda.cpnunittransformer.cpn.Place;
-import hlomozda.cpnunittransformer.cpn.Transition;
-import hlomozda.cpnunittransformer.generator.CpnGenerator;
-import hlomozda.cpnunittransformer.generator.CpnXmlGenerator;
-import hlomozda.cpnunittransformer.parser.CpnParser;
-import hlomozda.cpnunittransformer.parser.DomCpnParser;
+import hlomozda.cpnio.cpn.ColoredPetriNet;
+import hlomozda.cpnio.cpn.Page;
+import hlomozda.cpnio.cpn.Place;
+import hlomozda.cpnio.cpn.Transition;
+import hlomozda.cpnio.generator.CpnGenerator;
+import hlomozda.cpnio.generator.CpnXmlGenerator;
+import hlomozda.cpnio.parser.CpnParser;
+import hlomozda.cpnio.parser.DomCpnParser;
 import hlomozda.cpnunittransformer.transformer.CpnTransformer;
 import hlomozda.cpnunittransformer.transformer.CpnUnitTransformer;
 import hlomozda.cpnunittransformer.tss.CpnTssFinderRunner;
-import hlomozda.cpnunittransformer.utils.IncidenceMatrixBuilder;
+import hlomozda.cpnio.utils.IncidenceMatrixBuilder;
 
 import org.apache.log4j.Logger;
 

@@ -1,6 +1,6 @@
 package hlomozda.cpnunittransformer.transformer;
 
-import hlomozda.cpnunittransformer.cpn.ColoredPetriNet;
+import hlomozda.cpnio.cpn.ColoredPetriNet;
 
 public interface CpnTransformer {
 

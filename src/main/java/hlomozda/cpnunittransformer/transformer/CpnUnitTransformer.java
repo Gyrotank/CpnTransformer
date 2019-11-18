@@ -3,13 +3,13 @@ package hlomozda.cpnunittransformer.transformer;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import hlomozda.cpnunittransformer.cpn.Arc;
-import hlomozda.cpnunittransformer.cpn.ColoredPetriNet;
-import hlomozda.cpnunittransformer.cpn.Page;
-import hlomozda.cpnunittransformer.cpn.Place;
-import hlomozda.cpnunittransformer.cpn.Transition;
-import hlomozda.cpnunittransformer.geom.Point;
-import static hlomozda.cpnunittransformer.definitions.CpnMlDefinitions.*;
+import hlomozda.cpnio.cpn.Arc;
+import hlomozda.cpnio.cpn.ColoredPetriNet;
+import hlomozda.cpnio.cpn.Page;
+import hlomozda.cpnio.cpn.Place;
+import hlomozda.cpnio.cpn.Transition;
+import hlomozda.cpnio.geom.Point;
+import static hlomozda.cpnio.definitions.CpnMlDefinitions.*;
 
 public class CpnUnitTransformer implements CpnTransformer {
 
@@ -38,7 +38,7 @@ public class CpnUnitTransformer implements CpnTransformer {
     private static final String REGEXP_NON_ZERO_NUMBERS = "^[1-9][0-9]*$";
 
     /* (non-Javadoc)
-     * @see hlomozda.cpnunittransformer.transformer.CpnTransformer#transform(hlomozda.cpnunittransformer.cpn.ColoredPetriNet)
+     * @see hlomozda.cpnunittransformer.transformer.CpnTransformer#transform(ColoredPetriNet)
      */
     @Override
     public ColoredPetriNet transform(final ColoredPetriNet cpn) {

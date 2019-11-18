@@ -4,10 +4,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import hlomozda.cpnunittransformer.cpn.ColoredPetriNet;
-import hlomozda.cpnunittransformer.cpn.Page;
-import hlomozda.cpnunittransformer.parser.CpnParser;
-import hlomozda.cpnunittransformer.parser.DomCpnParser;
+import hlomozda.cpnio.cpn.ColoredPetriNet;
+import hlomozda.cpnio.cpn.Page;
+import hlomozda.cpnio.parser.CpnParser;
+import hlomozda.cpnio.parser.DomCpnParser;
 import hlomozda.cpnunittransformer.transformer.CpnTransformer;
 import hlomozda.cpnunittransformer.transformer.CpnUnitTransformer;
 

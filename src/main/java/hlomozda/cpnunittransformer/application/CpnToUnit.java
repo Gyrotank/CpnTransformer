@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import hlomozda.cpnio.cpn.ColoredPetriNet;
-import hlomozda.cpnio.cpn.Page;
 import hlomozda.cpnio.cpn.Place;
 import hlomozda.cpnio.cpn.Transition;
 import hlomozda.cpnio.generator.CpnGenerator;
@@ -22,6 +21,8 @@ import hlomozda.cpnunittransformer.tss.CpnTssFinderRunner;
 import hlomozda.cpnio.utils.IncidenceMatrixBuilder;
 
 import org.apache.log4j.Logger;
+
+import static hlomozda.cpnio.utils.CpnIOUtils.logCpnInfo;
 
 public class CpnToUnit {
 
@@ -38,7 +39,7 @@ public class CpnToUnit {
         }
 
         logger.info("Input CPN: ");
-        printCpnInfo(cpn);
+        logCpnInfo(logger, cpn);
 
         CpnTransformer transformer = new CpnUnitTransformer();
         CpnGenerator cut = new CpnXmlGenerator();
@@ -53,7 +54,7 @@ public class CpnToUnit {
         outCpnNet.close();
 
         logger.info("Output CPN: ");
-        printCpnInfo(cpn);
+        logCpnInfo(logger, cpn);
         logger.info("Output CPN created successfully");
 
         if (reportToBeGenerated(args)) {
@@ -157,19 +158,5 @@ public class CpnToUnit {
         return false;
     }
 
-    private static void printCpnInfo(final ColoredPetriNet cpn) {
-        int cpnPagesCount = cpn.getPages().size();
-        int cpnPlacesCount = 0;
-        int cpnTransitionsCount = 0;
-        int cpnArcsCount = 0;
-        for (Page p : cpn.getPages()) {
-            cpnPlacesCount += p.getPlaces().size();
-            cpnTransitionsCount += p.getTransitions().size();
-            cpnArcsCount += p.getArcsCount();
-        }
-        logger.info("-- " + cpnPagesCount + " pages;");
-        logger.info("-- " + cpnPlacesCount + " places;");
-        logger.info("-- " + cpnTransitionsCount + " transitions;");
-        logger.info("-- " + cpnArcsCount + " arcs.\n\n");
-    }
+
 }

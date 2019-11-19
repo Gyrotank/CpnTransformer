@@ -18,7 +18,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class CpnBddTest {
+class CpnToBddTest {
 
     private static ColoredPetriNet cpn;
 
@@ -39,9 +39,14 @@ class CpnBddTest {
         @SuppressWarnings("unchecked")
         List<Map<String, List<String>>> processedCpn = new ArrayList<>(processor.process(cpn));
 
-        assertEquals(1, processedCpn.size());
+        assertEquals(2, processedCpn.size());
+        assertEquals(1, processedCpn.get(0).get("Name").size());
         assertEquals(2, processedCpn.get(0).get("Given").size());
         assertEquals(1, processedCpn.get(0).get("When").size());
         assertEquals(2, processedCpn.get(0).get("Then").size());
+        assertEquals(1, processedCpn.get(1).get("Name").size());
+        assertEquals(2, processedCpn.get(1).get("Given").size());
+        assertEquals(1, processedCpn.get(1).get("When").size());
+        assertEquals(2, processedCpn.get(1).get("Then").size());
     }
 }

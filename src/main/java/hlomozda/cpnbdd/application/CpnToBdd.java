@@ -1,8 +1,6 @@
 package hlomozda.cpnbdd.application;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -40,21 +38,66 @@ public class CpnToBdd {
         @SuppressWarnings("unchecked")
         List<Map<String, List<String>>> processedCpn = new ArrayList<>(processor.process(cpn));
 
+        OutputStream outCpnNet;
+        if (args.length == 1) {
+            outCpnNet = new FileOutputStream(args[0].substring(0, args[0].lastIndexOf('.')) + "_CpnToBdd.story");
+        } else {
+            outCpnNet = new FileOutputStream(args[1]);
+        }
+
         processedCpn.forEach(scenario -> {
+            String line = "Scenario: " + scenario.get("Name").get(0);
+            logger.info(line);
+            try {
+                outCpnNet.write(line.getBytes());
+                outCpnNet.write(System.lineSeparator().getBytes());
+            } catch (IOException e) {
+                logger.error(e);
+            }
+
             List<String> preconditions = scenario.get("Given");
             for (int i = 0; i < preconditions.size(); i++) {
-                logger.info((i == 0 ? "Given " : "And ") + preconditions.get(i).replace("\n", ""));
+                line = (i == 0 ? "Given " : "And ") + preconditions.get(i).replace("\n", "");
+                logger.info(line);
+                try {
+                    outCpnNet.write(line.getBytes());
+                    outCpnNet.write(System.lineSeparator().getBytes());
+                } catch (IOException e) {
+                    logger.error(e);
+                }
             }
+
             List<String> actions = scenario.get("When");
             for (int i = 0; i < actions.size(); i++) {
-                logger.info((i == 0 ? "When " : "And ") + actions.get(i).replace("\n", ""));
+                line = (i == 0 ? "When " : "And ") + actions.get(i).replace("\n", "");
+                logger.info(line);
+                try {
+                    outCpnNet.write(line.getBytes());
+                    outCpnNet.write(System.lineSeparator().getBytes());
+                } catch (IOException e) {
+                    logger.error(e);
+                }
             }
+
             List<String> postconditions = scenario.get("Then");
             for (int i = 0; i < postconditions.size(); i++) {
-                logger.info((i == 0 ? "Then " : "And ") + postconditions.get(i).replace("\n", ""));
+                line = (i == 0 ? "Then " : "And ") + postconditions.get(i).replace("\n", "");
+                logger.info(line);
+                try {
+                    outCpnNet.write(line.getBytes());
+                    outCpnNet.write(System.lineSeparator().getBytes());
+                } catch (IOException e) {
+                    logger.error(e);
+                }
+            }
+            try {
+                outCpnNet.write(System.lineSeparator().getBytes());
+                outCpnNet.write(System.lineSeparator().getBytes());
+            } catch (IOException e) {
+                logger.error(e);
             }
             logger.info("\n\n");
         });
-
+        outCpnNet.close();
     }
 }

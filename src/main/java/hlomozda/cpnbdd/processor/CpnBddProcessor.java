@@ -1,6 +1,7 @@
 package hlomozda.cpnbdd.processor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,7 @@ public class CpnBddProcessor implements CpnProcessor {
 
             page.getTransitions().forEach(t -> actions.add(t.getNameValue()));
 
+            scenario.put("Name", Collections.singletonList(page.getName()));
             scenario.put("Given", preconditions);
             scenario.put("When", actions);
             scenario.put("Then", postconditions);

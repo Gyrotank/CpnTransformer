@@ -54,13 +54,20 @@ Output:
 
 2019-11-13 13:34:54 INFO  CpnToUnit:54 - Output CPN created successfully
 
+===
 
 # CpnToBdd (UNFINISHED)
 
 CpnToBdd utility transforms specifically structured colored Petri nets into a set of BDD scenarios written in Given-When-Then terms.
 
-In order to run the program, provide a single argument (name of the source file):
+In order to run the program, provide two files as arguments: the first containing original colored Petri net
+in .cpn format used by CPN Tools (http://cpntools.org/), and the second to hold the generated BDD scenarios (it will be created if it doesn't exist):
+
+\> java CpnToBdd file1 file2 
+
+
+Alternatively, you can provide a single argument (name of the source file):
 
 \> java CpnToBdd sourceFile.cpn
 
-The output file will be created named sourceFile_CpnToBdd.story.
+Then the output file will be created named sourceFile_CpnToBdd.story.

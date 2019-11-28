@@ -1,20 +1,20 @@
 package hlomozda.cpnbdd;
 
-import hlomozda.cpnbdd.processor.CpnBddProcessor;
-import hlomozda.cpnbdd.processor.CpnProcessor;
-import hlomozda.cpnio.cpn.ColoredPetriNet;
-import hlomozda.cpnio.cpn.Page;
-import hlomozda.cpnio.parser.CpnParser;
-import hlomozda.cpnio.parser.DomCpnParser;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import hlomozda.cpnbdd.processor.CpnBddProcessor;
+import hlomozda.cpnbdd.processor.CpnProcessor;
+import hlomozda.cpnio.cpn.ColoredPetriNet;
+import hlomozda.cpnio.parser.CpnParser;
+import hlomozda.cpnio.parser.DomCpnParser;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -34,9 +34,8 @@ class CpnToBddTest {
 
     @Test
     void cpnBddBasicTest() {
-        CpnProcessor processor = new CpnBddProcessor();
+        CpnProcessor<Map<String, List<String>>> processor = new CpnBddProcessor();
 
-        @SuppressWarnings("unchecked")
         List<Map<String, List<String>>> processedCpn = new ArrayList<>(processor.process(cpn));
 
         assertEquals(2, processedCpn.size());
@@ -44,9 +43,11 @@ class CpnToBddTest {
         assertEquals(2, processedCpn.get(0).get("Given").size());
         assertEquals(1, processedCpn.get(0).get("When").size());
         assertEquals(2, processedCpn.get(0).get("Then").size());
+        assertEquals(0, processedCpn.get(0).get("Examples").size());
         assertEquals(1, processedCpn.get(1).get("Name").size());
         assertEquals(2, processedCpn.get(1).get("Given").size());
         assertEquals(1, processedCpn.get(1).get("When").size());
         assertEquals(2, processedCpn.get(1).get("Then").size());
+        assertEquals(0, processedCpn.get(1).get("Examples").size());
     }
 }

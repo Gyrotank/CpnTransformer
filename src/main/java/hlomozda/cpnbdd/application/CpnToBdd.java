@@ -33,9 +33,8 @@ public class CpnToBdd {
         logger.info("Input CPN: ");
         logCpnInfo(logger, cpn);
 
-        CpnProcessor processor = new CpnBddProcessor();
+        CpnProcessor<Map<String, List<String>>> processor = new CpnBddProcessor();
 
-        @SuppressWarnings("unchecked")
         List<Map<String, List<String>>> processedCpn = new ArrayList<>(processor.process(cpn));
 
         OutputStream outCpnNet;

@@ -1,6 +1,8 @@
+The project currently contains two applications which work with colored Petri nets made with CPN Tools.
+
 # CpnToUnit
 
-CpnToUnit utility transforms general colored Petri nets into colored Petri nets using only unit tokens,
+CpnToUnit application transforms general colored Petri nets into colored Petri nets using only unit tokens,
 effectively making them simple Petri nets with non-distinguishable tokens. It allows us to apply invariants method to their analysis, which uses Truncated Set of Solutions finding algorithm for Petri net state equations expressed through systems of linear homogeneous Diophantine equations.
 
 In order to run the program, provide two files as arguments: the first containing original colored Petri net
@@ -58,7 +60,7 @@ Output:
 
 # CpnToBdd (UNFINISHED)
 
-CpnToBdd utility transforms specifically structured colored Petri nets into a set of BDD scenarios written in Given-When-Then terms.
+CpnToBdd application transforms specifically structured colored Petri nets into a set of BDD scenarios written in Given-When-Then terms.
 
 In order to run the program, provide two files as arguments: the first containing original colored Petri net
 in .cpn format used by CPN Tools (http://cpntools.org/), and the second to hold the generated BDD scenarios (it will be created if it doesn't exist):

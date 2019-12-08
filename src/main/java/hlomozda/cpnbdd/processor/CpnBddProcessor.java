@@ -39,7 +39,7 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
                     postconditions.add(p.getNameValue());
                 }
                 if (!p.getInitMark().getValue().isEmpty()) {
-                    examples.addAll(processInitMarking(p));
+                    examples.addAll(processInitMarking(page, p));
                 }
             });
 
@@ -56,15 +56,20 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
         return result;
     }
 
-    private List<String> processInitMarking(final Place place) {
+    private List<String> processInitMarking(final Page page, final Place place) {
         List<String> result = new ArrayList<>();
 
         if (place.getType().getValue().equals("UNIT")) {
             return result;
         }
 
+        String variableName = page.getArcs().stream()
+                .filter(a -> a.getPlace().equals(place) && a.getOrientation().equals(Arc.Orientation.TO_TRANS))
+                .collect(Collectors.toList()).get(0).getAnnotation().getValue();
+        String variableValue = place.getInitMark().getValue();
 
-
+        result.add(variableName);
+        result.add(variableValue);
         return result;
     }
 }

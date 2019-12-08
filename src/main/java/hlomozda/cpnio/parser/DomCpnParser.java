@@ -1,4 +1,5 @@
 /*CREATED BY OLEG MATSUK*/
+/*WITH ADDITIONS BY DMYTRO HLOMOZDA*/
 
 package hlomozda.cpnio.parser;
 
@@ -116,14 +117,19 @@ public class DomCpnParser implements CpnParser {
         return declarations;
     }
 
+    //modified by Dmytro Hlomozda (added parsing of id nodes)
     private String parseDeclaration(final Node node) {
+        String result = null;
         for (int i = 0; i < node.getChildNodes().getLength(); ++i) {
             Node childNode = node.getChildNodes().item(i);
+            if (result == null && childNode.getNodeName().equals("id")) {
+                result = childNode.getTextContent();
+            }
             if (childNode.getNodeName().equals("layout")) {
-                return childNode.getTextContent();
+                result = childNode.getTextContent();
             }
         }
-        return null;
+        return result;
     }
 
     private Page parsePage(final Node node) {

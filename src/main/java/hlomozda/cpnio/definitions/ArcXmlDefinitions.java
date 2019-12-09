@@ -20,6 +20,8 @@ public class ArcXmlDefinitions implements XmlDefinitions {
     
     public static final String TAG_TRANSEND = "<transend idref=\"%s\"/>";
 
+    public static final String DEFAULT_ANNOTATION = "1`()";
+
     private ArcXmlDefinitions() {
     }
 }

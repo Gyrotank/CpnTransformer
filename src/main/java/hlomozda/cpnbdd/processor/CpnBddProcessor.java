@@ -11,6 +11,7 @@ import hlomozda.cpnio.cpn.Arc;
 import hlomozda.cpnio.cpn.ColoredPetriNet;
 import hlomozda.cpnio.cpn.Page;
 import hlomozda.cpnio.cpn.Place;
+import hlomozda.cpnio.definitions.ArcXmlDefinitions;
 
 public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> {
 
@@ -33,7 +34,12 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
                         .filter(a -> a.getPlace().equals(p) && a.getOrientation().equals(Arc.Orientation.TO_PLACE))
                         .collect(Collectors.toList());
                 if (!arcsFromPlace.isEmpty()) {
-                    preconditions.add(p.getNameValue());
+                    StringBuilder statement = new StringBuilder(p.getNameValue());
+                    String arcAnnotation = arcsFromPlace.get(0).getAnnotation().getValue();
+                    if (!ArcXmlDefinitions.DEFAULT_ANNOTATION.equals(arcAnnotation)) {
+                        statement.append(" with parameters: <").append(arcAnnotation).append(">");
+                    }
+                    preconditions.add(statement.toString());
                 }
                 if (!arcsToPlace.isEmpty()) {
                     postconditions.add(p.getNameValue());

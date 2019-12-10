@@ -1,4 +1,5 @@
 /*CREATED BY OLEG MATSUK*/
+/*WITH ADDITIONS BY DMYTRO HLOMOZDA*/
 
 package hlomozda.cpnio.parser;
 
@@ -14,14 +15,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.log4j.Logger;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
 import hlomozda.cpnio.cpn.Arc;
 import hlomozda.cpnio.cpn.ColoredPetriNet;
 import hlomozda.cpnio.cpn.Page;
@@ -34,6 +27,14 @@ import hlomozda.cpnio.geom.Rectangle;
 import hlomozda.cpnio.geom.Shape;
 import hlomozda.cpnio.gfx.Line;
 import hlomozda.cpnio.gfx.Text;
+
+import org.apache.log4j.Logger;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 public class DomCpnParser implements CpnParser {
 
@@ -116,14 +117,19 @@ public class DomCpnParser implements CpnParser {
         return declarations;
     }
 
+    //modified by Dmytro Hlomozda (added parsing of id nodes)
     private String parseDeclaration(final Node node) {
+        String result = null;
         for (int i = 0; i < node.getChildNodes().getLength(); ++i) {
             Node childNode = node.getChildNodes().item(i);
+            if (result == null && childNode.getNodeName().equals("id")) {
+                result = childNode.getTextContent();
+            }
             if (childNode.getNodeName().equals("layout")) {
-                return childNode.getTextContent();
+                result = childNode.getTextContent();
             }
         }
-        return null;
+        return result;
     }
 
     private Page parsePage(final Node node) {
@@ -250,14 +256,22 @@ public class DomCpnParser implements CpnParser {
         Element elem = (Element) node;
 
         String orientation = elem.getAttribute("orientation");
-        if (orientation.equals("PtoT"))
-            arc.setOrientation(Orientation.TO_TRANS);
-        else if (orientation.equals("TtoP"))
-            arc.setOrientation(Orientation.TO_PLACE);
-        else if (orientation.equals("BOTHDIR"))
-            arc.setOrientation(Orientation.BOTH_DIR);
-        else if (orientation.equals("Inhibitor"))
-            arc.setOrientation(Orientation.INHIBITOR);
+        switch (orientation) {
+            case "PtoT":
+                arc.setOrientation(Orientation.TO_TRANS);
+                break;
+            case "TtoP":
+                arc.setOrientation(Orientation.TO_PLACE);
+                break;
+            case "BOTHDIR":
+                arc.setOrientation(Orientation.BOTH_DIR);
+                break;
+            case "Inhibitor":
+                arc.setOrientation(Orientation.INHIBITOR);
+                break;
+            default:
+                break;
+        }
 
         int order = 0;
         try {
@@ -273,6 +287,7 @@ public class DomCpnParser implements CpnParser {
             switch (childNode.getNodeName()) {
                 case "lineattr":
                     arc.setLine(parseLine(childNode));
+                    break;
                 case "placeend":
                     String placeId = ((Element) childNode).getAttribute("idref");
                     arc.setPlace(placeIds.get(placeId));

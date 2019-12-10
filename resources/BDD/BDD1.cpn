@@ -54,12 +54,43 @@
           <string/>
         </color>
       </block>
+      <block id="ID1436959427">
+        <id>Custom Declarations</id>
+        <color id="ID1436959358">
+          <id>USER</id>
+          <record>
+            <recordfield>
+              <id>name</id>
+              <id>STRING</id>
+            </recordfield>
+            <recordfield>
+              <id>isActive</id>
+              <id>BOOL</id>
+            </recordfield>
+          </record>
+          <layout>colset USER = record name:STRING * isActive:BOOL;</layout>
+        </color>
+        <var id="ID1436960179">
+          <type>
+            <id>USER</id>
+          </type>
+          <id>u</id>
+          <layout>var u: USER;</layout>
+        </var>
+        <var id="ID1436960679">
+          <type>
+            <id>BOOL</id>
+          </type>
+          <id>isOnMainPage</id>
+          <layout>var isOnMainPage: BOOL;</layout>
+        </var>
+      </block>
     </globbox>
     <page id="ID6">
       <pageattr name="Logging In"/>
       <place id="ID1436952854">
         <posattr x="-84.000000"
-                 y="210.000000"/>
+                 y="252.000000"/>
         <fillattr colour="White"
                   pattern=""
                   filled="false"/>
@@ -82,8 +113,8 @@ Login Page</text>
                 anchor.vertical="2"/>
         </marking>
         <type id="ID1436952855">
-          <posattr x="-32.000000"
-                   y="167.000000"/>
+          <posattr x="-30.500000"
+                   y="209.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -93,11 +124,11 @@ Login Page</text>
           <textattr colour="Black"
                     bold="false"/>
           <text tool="CPN Tools"
-                version="4.0.1">UNIT</text>
+                version="4.0.1">USER</text>
         </type>
         <initmark id="ID1436952856">
-          <posattr x="-43.000000"
-                   y="252.000000"/>
+          <posattr x="-221.500000"
+                   y="294.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -107,12 +138,12 @@ Login Page</text>
           <textattr colour="Black"
                     bold="false"/>
           <text tool="CPN Tools"
-                version="4.0.1">1`()</text>
+                version="4.0.1">{name=&quot;USER1&quot;, isActive=true}</text>
         </initmark>
       </place>
       <place id="ID1436952868">
-        <posattr x="84.000000"
-                 y="210.000000"/>
+        <posattr x="168.000000"
+                 y="252.000000"/>
         <fillattr colour="White"
                   pattern=""
                   filled="false"/>
@@ -135,8 +166,8 @@ Main Page</text>
                 anchor.vertical="0"/>
         </marking>
         <type id="ID1436952869">
-          <posattr x="133.000000"
-                   y="166.000000"/>
+          <posattr x="218.500000"
+                   y="208.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -146,11 +177,11 @@ Main Page</text>
           <textattr colour="Black"
                     bold="false"/>
           <text tool="CPN Tools"
-                version="4.0.1">UNIT</text>
+                version="4.0.1">USER</text>
         </type>
         <initmark id="ID1436952870">
-          <posattr x="150.000000"
-                   y="253.000000"/>
+          <posattr x="234.000000"
+                   y="295.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -165,7 +196,7 @@ Main Page</text>
       </place>
       <place id="ID1436954248">
         <posattr x="-84.000000"
-                 y="42.000000"/>
+                 y="0.000000"/>
         <fillattr colour="White"
                   pattern=""
                   filled="false"/>
@@ -190,7 +221,7 @@ Active</text>
         </marking>
         <type id="ID1436954249">
           <posattr x="-32.000000"
-                   y="-1.000000"/>
+                   y="-42.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -202,9 +233,9 @@ Active</text>
           <text tool="CPN Tools"
                 version="4.0.1">UNIT</text>
         </type>
-        <initmark id="ID1436954250">
+        <initmark id="ID1436959335">
           <posattr x="-43.000000"
-                   y="84.000000"/>
+                   y="42.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -218,8 +249,8 @@ Active</text>
         </initmark>
       </place>
       <place id="ID1436955842">
-        <posattr x="84.000000"
-                 y="42.000000"/>
+        <posattr x="168.000000"
+                 y="0.000000"/>
         <fillattr colour="White"
                   pattern=""
                   filled="false"/>
@@ -242,8 +273,8 @@ is Visible</text>
                 anchor.vertical="0"/>
         </marking>
         <type id="ID1436955843">
-          <posattr x="133.000000"
-                   y="-2.000000"/>
+          <posattr x="217.000000"
+                   y="-43.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -256,8 +287,8 @@ is Visible</text>
                 version="4.0.1">UNIT</text>
         </type>
         <initmark id="ID1436955844">
-          <posattr x="150.000000"
-                   y="85.000000"/>
+          <posattr x="234.000000"
+                   y="43.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -272,7 +303,7 @@ is Visible</text>
       </place>
       <trans id="ID1436952840"
              explicit="false">
-        <posattr x="0.000000"
+        <posattr x="42.000000"
                  y="126.000000"/>
         <fillattr colour="White"
                   pattern=""
@@ -284,13 +315,13 @@ is Visible</text>
                   bold="false"/>
         <text>user 
 logs in</text>
-        <box w="60.000000"
+        <box w="136.000000"
              h="40.000000"/>
         <binding x="7.200000"
                  y="-3.000000"/>
         <cond id="ID1436952841">
-          <posattr x="-39.000000"
-                   y="157.000000"/>
+          <posattr x="42.000000"
+                   y="95.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -300,10 +331,10 @@ logs in</text>
           <textattr colour="Black"
                     bold="false"/>
           <text tool="CPN Tools"
-                version="4.0.1"/>
+                version="4.0.1">[#isActive u = true]</text>
         </cond>
         <time id="ID1436952842">
-          <posattr x="44.500000"
+          <posattr x="124.500000"
                    y="157.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
@@ -317,7 +348,7 @@ logs in</text>
                 version="4.0.1"/>
         </time>
         <code id="ID1436952843">
-          <posattr x="64.500000"
+          <posattr x="144.500000"
                    y="74.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
@@ -331,7 +362,7 @@ logs in</text>
                 version="4.0.1"/>
         </code>
         <priority id="ID1436952845">
-          <posattr x="-68.000000"
+          <posattr x="-64.000000"
                    y="95.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
@@ -375,8 +406,8 @@ logs in</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1436956023">
-          <posattr x="-57.000000"
+        <annot id="ID1436958947">
+          <posattr x="-55.000000"
                    y="149.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
@@ -387,7 +418,7 @@ logs in</text>
           <textattr colour="Black"
                     bold="false"/>
           <text tool="CPN Tools"
-                version="4.0.1">1`()</text>
+                version="4.0.1">u</text>
         </annot>
       </arc>
       <arc id="ID1436952959"
@@ -409,7 +440,7 @@ logs in</text>
         <placeend idref="ID1436952868"/>
         <bendpoint id="ID1436955314"
                    serial="1">
-          <posattr x="84.000000"
+          <posattr x="168.000000"
                    y="138.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
@@ -420,8 +451,8 @@ logs in</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1436956024">
-          <posattr x="57.000000"
+        <annot id="ID1436958948">
+          <posattr x="139.000000"
                    y="149.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
@@ -432,7 +463,7 @@ logs in</text>
           <textattr colour="Black"
                     bold="false"/>
           <text tool="CPN Tools"
-                version="4.0.1">1`()</text>
+                version="4.0.1">u</text>
         </annot>
       </arc>
       <arc id="ID1436954347"
@@ -465,9 +496,9 @@ logs in</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1436956025">
-          <posattr x="-57.000000"
-                   y="123.000000"/>
+        <annot id="ID1436960725">
+          <posattr x="-55.000000"
+                   y="101.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -499,8 +530,8 @@ logs in</text>
         <placeend idref="ID1436955842"/>
         <bendpoint id="ID1436955985"
                    serial="1">
-          <posattr x="84.000000"
-                   y="115.000000"/>
+          <posattr x="168.000000"
+                   y="114.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -510,9 +541,9 @@ logs in</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1436956026">
-          <posattr x="57.000000"
-                   y="126.000000"/>
+        <annot id="ID1436960726">
+          <posattr x="139.000000"
+                   y="125.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -530,8 +561,8 @@ logs in</text>
     <page id="ID1436956372">
       <pageattr name="Logging Out"/>
       <place id="ID1436956503">
-        <posattr x="-168.000000"
-                 y="126.000000"/>
+        <posattr x="-210.000000"
+                 y="168.000000"/>
         <fillattr colour="White"
                   pattern=""
                   filled="false"/>
@@ -542,7 +573,7 @@ logs in</text>
                   bold="false"/>
         <text>User on 
 Main Page</text>
-        <ellipse w="90.000000"
+        <ellipse w="94.000000"
                  h="94.000000"/>
         <token x="-59.000000"
                y="51.000000"/>
@@ -554,8 +585,8 @@ Main Page</text>
                 anchor.vertical="2"/>
         </marking>
         <type id="ID1436956504">
-          <posattr x="-118.000000"
-                   y="82.000000"/>
+          <posattr x="-155.500000"
+                   y="124.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -565,11 +596,11 @@ Main Page</text>
           <textattr colour="Black"
                     bold="false"/>
           <text tool="CPN Tools"
-                version="4.0.1">UNIT</text>
+                version="4.0.1">BOOL</text>
         </type>
         <initmark id="ID1436956505">
-          <posattr x="-129.000000"
-                   y="169.000000"/>
+          <posattr x="-160.000000"
+                   y="211.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -579,12 +610,12 @@ Main Page</text>
           <textattr colour="Black"
                     bold="false"/>
           <text tool="CPN Tools"
-                version="4.0.1">1`()</text>
+                version="4.0.1">true</text>
         </initmark>
       </place>
       <place id="ID1436956601">
-        <posattr x="-168.000000"
-                 y="-42.000000"/>
+        <posattr x="-210.000000"
+                 y="-84.000000"/>
         <fillattr colour="White"
                   pattern=""
                   filled="false"/>
@@ -596,7 +627,7 @@ Main Page</text>
         <text>Log Out 
 Button is 
 Active</text>
-        <ellipse w="90.000000"
+        <ellipse w="94.000000"
                  h="94.000000"/>
         <token x="-59.000000"
                y="-51.000000"/>
@@ -608,8 +639,8 @@ Active</text>
                 anchor.vertical="1"/>
         </marking>
         <type id="ID1436956602">
-          <posattr x="-118.000000"
-                   y="-85.000000"/>
+          <posattr x="-158.000000"
+                   y="-127.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -622,8 +653,8 @@ Active</text>
                 version="4.0.1">UNIT</text>
         </type>
         <initmark id="ID1436956603">
-          <posattr x="-129.000000"
-                   y="2.000000"/>
+          <posattr x="-169.000000"
+                   y="-40.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -637,8 +668,8 @@ Active</text>
         </initmark>
       </place>
       <place id="ID1436956649">
-        <posattr x="0.000000"
-                 y="126.000000"/>
+        <posattr x="42.000000"
+                 y="168.000000"/>
         <fillattr colour="White"
                   pattern=""
                   filled="false"/>
@@ -661,8 +692,8 @@ Login Page</text>
                 anchor.vertical="0"/>
         </marking>
         <type id="ID1436956650">
-          <posattr x="49.000000"
-                   y="82.000000"/>
+          <posattr x="91.000000"
+                   y="124.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -675,8 +706,8 @@ Login Page</text>
                 version="4.0.1">UNIT</text>
         </type>
         <initmark id="ID1436956651">
-          <posattr x="66.000000"
-                   y="169.000000"/>
+          <posattr x="108.000000"
+                   y="211.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -690,8 +721,8 @@ Login Page</text>
         </initmark>
       </place>
       <place id="ID1436956700">
-        <posattr x="0.000000"
-                 y="-42.000000"/>
+        <posattr x="42.000000"
+                 y="-84.000000"/>
         <fillattr colour="White"
                   pattern=""
                   filled="false"/>
@@ -715,8 +746,8 @@ Active</text>
                 anchor.vertical="0"/>
         </marking>
         <type id="ID1436956701">
-          <posattr x="49.000000"
-                   y="-85.000000"/>
+          <posattr x="91.000000"
+                   y="-127.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -729,8 +760,8 @@ Active</text>
                 version="4.0.1">UNIT</text>
         </type>
         <initmark id="ID1436956702">
-          <posattr x="66.000000"
-                   y="2.000000"/>
+          <posattr x="108.000000"
+                   y="-40.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -757,12 +788,12 @@ Active</text>
                   bold="false"/>
         <text>user 
 logs out</text>
-        <box w="60.000000"
+        <box w="138.000000"
              h="40.000000"/>
         <binding x="7.200000"
                  y="-3.000000"/>
         <cond id="ID1436956865">
-          <posattr x="-123.000000"
+          <posattr x="-84.000000"
                    y="73.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
@@ -773,10 +804,10 @@ logs out</text>
           <textattr colour="Black"
                     bold="false"/>
           <text tool="CPN Tools"
-                version="4.0.1"/>
+                version="4.0.1">[isOnMainPage = true]</text>
         </cond>
         <time id="ID1436956866">
-          <posattr x="-39.500000"
+          <posattr x="-0.500000"
                    y="73.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
@@ -790,7 +821,7 @@ logs out</text>
                 version="4.0.1"/>
         </time>
         <code id="ID1436956867">
-          <posattr x="-19.500000"
+          <posattr x="19.500000"
                    y="-10.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
@@ -804,7 +835,7 @@ logs out</text>
                 version="4.0.1"/>
         </code>
         <priority id="ID1436956869">
-          <posattr x="-152.000000"
+          <posattr x="-191.000000"
                    y="11.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
@@ -837,7 +868,7 @@ logs out</text>
         <placeend idref="ID1436956503"/>
         <bendpoint id="ID1436957221"
                    serial="1">
-          <posattr x="-168.000000"
+          <posattr x="-210.000000"
                    y="53.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
@@ -848,9 +879,9 @@ logs out</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1436957220">
-          <posattr x="-141.000000"
-                   y="64.000000"/>
+        <annot id="ID1436958951">
+          <posattr x="-208.000000"
+                   y="91.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -860,7 +891,7 @@ logs out</text>
           <textattr colour="Black"
                     bold="false"/>
           <text tool="CPN Tools"
-                version="4.0.1">1`()</text>
+                version="4.0.1">isOnMainPage</text>
         </annot>
       </arc>
       <arc id="ID1436957291"
@@ -882,7 +913,7 @@ logs out</text>
         <placeend idref="ID1436956601"/>
         <bendpoint id="ID1436957293"
                    serial="1">
-          <posattr x="-168.000000"
+          <posattr x="-210.000000"
                    y="27.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
@@ -893,9 +924,9 @@ logs out</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1436957292">
-          <posattr x="-141.000000"
-                   y="38.000000"/>
+        <annot id="ID1436960727">
+          <posattr x="-182.000000"
+                   y="16.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -927,8 +958,8 @@ logs out</text>
         <placeend idref="ID1436956649"/>
         <bendpoint id="ID1436958783"
                    serial="1">
-          <posattr x="0.000000"
-                   y="53.000000"/>
+          <posattr x="42.000000"
+                   y="55.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -938,9 +969,9 @@ logs out</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1436958782">
-          <posattr x="-27.000000"
-                   y="64.000000"/>
+        <annot id="ID1436960728">
+          <posattr x="14.000000"
+                   y="44.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -972,8 +1003,8 @@ logs out</text>
         <placeend idref="ID1436956700"/>
         <bendpoint id="ID1436958906"
                    serial="1">
-          <posattr x="0.000000"
-                   y="29.000000"/>
+          <posattr x="42.000000"
+                   y="30.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -983,9 +1014,9 @@ logs out</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1436958905">
-          <posattr x="-27.000000"
-                   y="40.000000"/>
+        <annot id="ID1436960729">
+          <posattr x="14.000000"
+                   y="41.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -1027,11 +1058,6 @@ logs out</text>
           <text>&lt;same as model&gt;</text>
         </value>
       </option>
-      <option name="extensions.10003.enable">
-        <value>
-          <boolean>true</boolean>
-        </value>
-      </option>
       <option name="extensions.10005.enable">
         <value>
           <boolean>true</boolean>
@@ -1042,22 +1068,7 @@ logs out</text>
           <boolean>true</boolean>
         </value>
       </option>
-      <option name="extensions.10004.enable">
-        <value>
-          <boolean>true</boolean>
-        </value>
-      </option>
       <option name="extensions.10007.enable">
-        <value>
-          <boolean>true</boolean>
-        </value>
-      </option>
-      <option name="extensions.10001.enable">
-        <value>
-          <boolean>true</boolean>
-        </value>
-      </option>
-      <option name="extensions.10006.enable">
         <value>
           <boolean>true</boolean>
         </value>
@@ -1067,7 +1078,37 @@ logs out</text>
           <boolean>true</boolean>
         </value>
       </option>
+      <option name="extensions.10006.enable">
+        <value>
+          <boolean>true</boolean>
+        </value>
+      </option>
+      <option name="extensions.10011.enable">
+        <value>
+          <boolean>true</boolean>
+        </value>
+      </option>
+      <option name="extensions.10004.enable">
+        <value>
+          <boolean>true</boolean>
+        </value>
+      </option>
+      <option name="extensions.10003.enable">
+        <value>
+          <boolean>true</boolean>
+        </value>
+      </option>
+      <option name="extensions.10001.enable">
+        <value>
+          <boolean>true</boolean>
+        </value>
+      </option>
       <option name="extensions.10007.options.discover">
+        <value>
+          <boolean>false</boolean>
+        </value>
+      </option>
+      <option name="extensions.10011.options.disable">
         <value>
           <boolean>false</boolean>
         </value>
@@ -1270,14 +1311,14 @@ logs out</text>
     </options>
     <binders>
       <cpnbinder id="ID2222"
-                 x="256"
-                 y="198"
-                 width="600"
-                 height="400">
+                 x="617"
+                 y="167"
+                 width="627"
+                 height="491">
         <sheets>
           <cpnsheet id="ID2215"
-                    panx="11.000000"
-                    pany="106.000000"
+                    panx="31.000000"
+                    pany="133.000000"
                     zoom="1.000000"
                     instance="ID2149">
             <zorder>
@@ -1285,8 +1326,8 @@ logs out</text>
             </zorder>
           </cpnsheet>
           <cpnsheet id="ID1436956390"
-                    panx="73.000000"
-                    pany="35.000000"
+                    panx="157.000000"
+                    pany="49.000000"
                     zoom="1.000000"
                     instance="ID1436956374">
             <zorder>
@@ -1295,8 +1336,8 @@ logs out</text>
           </cpnsheet>
         </sheets>
         <zorder>
-          <position value="1"/>
           <position value="0"/>
+          <position value="1"/>
         </zorder>
       </cpnbinder>
     </binders>
@@ -1367,28 +1408,35 @@ logs out</text>
           <IndexNode expanded="false"/>
           <IndexNode expanded="false"/>
           <IndexNode expanded="false"/>
+          <IndexNode expanded="false"/>
+        </IndexNode>
+        <IndexNode expanded="false">
+          <IndexNode expanded="false"/>
         </IndexNode>
         <IndexNode expanded="false">
           <IndexNode expanded="false"/>
         </IndexNode>
       </IndexNode>
-      <IndexNode expanded="false">
-        <IndexNode expanded="false"/>
-      </IndexNode>
-      <IndexNode expanded="false">
-        <IndexNode expanded="false">
+      <IndexNode expanded="false"/>
+      <IndexNode expanded="true">
+        <IndexNode expanded="true">
           <IndexNode expanded="true"/>
           <IndexNode expanded="true"/>
           <IndexNode expanded="true"/>
         </IndexNode>
         <IndexNode expanded="true">
-          <IndexNode expanded="false"/>
-          <IndexNode expanded="false"/>
-          <IndexNode expanded="false"/>
-          <IndexNode expanded="false"/>
-          <IndexNode expanded="false"/>
-          <IndexNode expanded="false"/>
-          <IndexNode expanded="false"/>
+          <IndexNode expanded="true"/>
+          <IndexNode expanded="true"/>
+          <IndexNode expanded="true"/>
+          <IndexNode expanded="true"/>
+          <IndexNode expanded="true"/>
+          <IndexNode expanded="true"/>
+          <IndexNode expanded="true"/>
+        </IndexNode>
+        <IndexNode expanded="true">
+          <IndexNode expanded="true"/>
+          <IndexNode expanded="true"/>
+          <IndexNode expanded="true"/>
         </IndexNode>
       </IndexNode>
       <IndexNode expanded="false"/>

@@ -33,9 +33,8 @@ public class CpnToBdd {
         logger.info("Input CPN: ");
         logCpnInfo(logger, cpn);
 
-        CpnProcessor processor = new CpnBddProcessor();
+        CpnProcessor<Map<String, List<String>>> processor = new CpnBddProcessor();
 
-        @SuppressWarnings("unchecked")
         List<Map<String, List<String>>> processedCpn = new ArrayList<>(processor.process(cpn));
 
         OutputStream outCpnNet;
@@ -46,58 +45,84 @@ public class CpnToBdd {
         }
 
         processedCpn.forEach(scenario -> {
-            String line = "Scenario: " + scenario.get("Name").get(0);
-            logger.info(line);
             try {
+                String line = "Scenario: " + scenario.get("Name").get(0);
+                logger.info(line);
                 outCpnNet.write(line.getBytes());
                 outCpnNet.write(System.lineSeparator().getBytes());
-            } catch (IOException e) {
-                logger.error(e);
-            }
 
-            List<String> preconditions = scenario.get("Given");
-            for (int i = 0; i < preconditions.size(); i++) {
-                line = (i == 0 ? "Given " : "And ") + preconditions.get(i).replace("\n", "");
-                logger.info(line);
-                try {
-                    outCpnNet.write(line.getBytes());
-                    outCpnNet.write(System.lineSeparator().getBytes());
-                } catch (IOException e) {
-                    logger.error(e);
-                }
-            }
+                outputPreconditions(outCpnNet, scenario.get("Given"));
 
-            List<String> actions = scenario.get("When");
-            for (int i = 0; i < actions.size(); i++) {
-                line = (i == 0 ? "When " : "And ") + actions.get(i).replace("\n", "");
-                logger.info(line);
-                try {
-                    outCpnNet.write(line.getBytes());
-                    outCpnNet.write(System.lineSeparator().getBytes());
-                } catch (IOException e) {
-                    logger.error(e);
-                }
-            }
+                outputActions(outCpnNet, scenario.get("When"));
 
-            List<String> postconditions = scenario.get("Then");
-            for (int i = 0; i < postconditions.size(); i++) {
-                line = (i == 0 ? "Then " : "And ") + postconditions.get(i).replace("\n", "");
-                logger.info(line);
-                try {
-                    outCpnNet.write(line.getBytes());
-                    outCpnNet.write(System.lineSeparator().getBytes());
-                } catch (IOException e) {
-                    logger.error(e);
-                }
-            }
-            try {
+                outputPostconditions(outCpnNet, scenario.get("Then"));
+
+                outputExamples(outCpnNet, scenario.get("Examples"));
+
+                logger.info("\n\n");
                 outCpnNet.write(System.lineSeparator().getBytes());
                 outCpnNet.write(System.lineSeparator().getBytes());
             } catch (IOException e) {
                 logger.error(e);
             }
-            logger.info("\n\n");
         });
         outCpnNet.close();
+    }
+
+    private static void outputPreconditions(final OutputStream outCpnNet, final List<String> preconditions) throws IOException {
+        for (int i = 0; i < preconditions.size(); i++) {
+            String line = (i == 0 ? "Given " : "And ") + preconditions.get(i).replace("\n", "");
+            logger.info(line);
+            outCpnNet.write(line.getBytes());
+            outCpnNet.write(System.lineSeparator().getBytes());
+        }
+    }
+
+    private static void outputActions(final OutputStream outCpnNet, final List<String> actions) throws IOException {
+        for (int i = 0; i < actions.size(); i++) {
+            String line = (i == 0 ? "When " : "And ") + actions.get(i).replace("\n", "");
+            logger.info(line);
+            outCpnNet.write(line.getBytes());
+            outCpnNet.write(System.lineSeparator().getBytes());
+        }
+    }
+
+    private static void outputPostconditions(final OutputStream outCpnNet, final List<String> postconditions) throws IOException {
+        for (int i = 0; i < postconditions.size(); i++) {
+            String line = (i == 0 ? "Then " : "And ") + postconditions.get(i).replace("\n", "");
+            logger.info(line);
+            outCpnNet.write(line.getBytes());
+            outCpnNet.write(System.lineSeparator().getBytes());
+        }
+    }
+
+    private static void outputExamples(final OutputStream outCpnNet, final List<String> examples) throws IOException {
+        if (!examples.isEmpty()) {
+            logger.info("Examples:");
+            outCpnNet.write("Examples:".getBytes());
+            outCpnNet.write(System.lineSeparator().getBytes());
+            for (int i = 0; i < examples.size(); i+=2) {
+                String line = "| " + examples.get(i) + " ";
+                logger.info(line);
+                outCpnNet.write(line.getBytes());
+                if (i == examples.size() - 2) {
+                    String rowEnd = "|";
+                    logger.info(rowEnd);
+                    outCpnNet.write(rowEnd.getBytes());
+                    outCpnNet.write(System.lineSeparator().getBytes());
+                }
+            }
+            for (int i = 1; i < examples.size(); i+=2) {
+                String line = "| " + examples.get(i) + " ";
+                logger.info(line);
+                outCpnNet.write(line.getBytes());
+                if (i == examples.size() - 1) {
+                    String rowEnd = "|";
+                    logger.info(rowEnd);
+                    outCpnNet.write(rowEnd.getBytes());
+                    outCpnNet.write(System.lineSeparator().getBytes());
+                }
+            }
+        }
     }
 }

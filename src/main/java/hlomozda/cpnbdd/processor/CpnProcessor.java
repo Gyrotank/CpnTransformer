@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import hlomozda.cpnio.cpn.ColoredPetriNet;
 
-public interface CpnProcessor {
+public interface CpnProcessor<T> {
 
     /**
      * Main processing method of the input parsed Colored Petri Net
@@ -12,6 +12,6 @@ public interface CpnProcessor {
      * @param cpn - parsed Colored Petri Net to be processed
      * @return processing results as Collection
      */
-    Collection process(final ColoredPetriNet cpn);
+    Collection<T> process(final ColoredPetriNet cpn);
 
 }

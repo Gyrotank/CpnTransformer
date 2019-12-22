@@ -40,6 +40,9 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
                         statement.append(" with parameters: <").append(arcAnnotation).append(">");
                     }
                     preconditions.add(statement.toString());
+                    if (!arcsFromPlace.get(0).getTransition().getCondition().getValue().isEmpty()) {
+                        preconditions.add(arcsFromPlace.get(0).getTransition().getCondition().getValue());
+                    }
                 }
                 if (!arcsToPlace.isEmpty()) {
                     postconditions.add(p.getNameValue());

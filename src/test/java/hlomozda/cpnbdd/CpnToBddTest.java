@@ -40,14 +40,14 @@ class CpnToBddTest {
 
         assertEquals(2, processedCpn.size());
         assertEquals(1, processedCpn.get(0).get("Name").size());
-        assertEquals(4, processedCpn.get(0).get("Given").size());
+        assertEquals(3, processedCpn.get(0).get("Given").size());
         assertEquals(1, processedCpn.get(0).get("When").size());
         assertEquals(2, processedCpn.get(0).get("Then").size());
         assertEquals(2, processedCpn.get(0).get("Examples").size());
         assertEquals(1, processedCpn.get(1).get("Name").size());
-        assertEquals(4, processedCpn.get(1).get("Given").size());
+        assertEquals(2, processedCpn.get(1).get("Given").size());
         assertEquals(1, processedCpn.get(1).get("When").size());
         assertEquals(2, processedCpn.get(1).get("Then").size());
-        assertEquals(2, processedCpn.get(1).get("Examples").size());
+        assertEquals(0, processedCpn.get(1).get("Examples").size());
     }
 }

@@ -77,13 +77,6 @@
           <id>u</id>
           <layout>var u: USER;</layout>
         </var>
-        <var id="ID1436960679">
-          <type>
-            <id>BOOL</id>
-          </type>
-          <id>isOnMainPage</id>
-          <layout>var isOnMainPage: BOOL;</layout>
-        </var>
       </block>
     </globbox>
     <page id="ID6">
@@ -496,7 +489,7 @@ logs in</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1436960725">
+        <annot id="ID1436960775">
           <posattr x="-55.000000"
                    y="101.000000"/>
           <fillattr colour="White"
@@ -541,7 +534,7 @@ logs in</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1436960726">
+        <annot id="ID1436960776">
           <posattr x="139.000000"
                    y="125.000000"/>
           <fillattr colour="White"
@@ -585,7 +578,7 @@ Main Page</text>
                 anchor.vertical="2"/>
         </marking>
         <type id="ID1436956504">
-          <posattr x="-155.500000"
+          <posattr x="-158.000000"
                    y="124.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
@@ -596,10 +589,10 @@ Main Page</text>
           <textattr colour="Black"
                     bold="false"/>
           <text tool="CPN Tools"
-                version="4.0.1">BOOL</text>
+                version="4.0.1">UNIT</text>
         </type>
         <initmark id="ID1436956505">
-          <posattr x="-160.000000"
+          <posattr x="-169.000000"
                    y="211.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
@@ -610,7 +603,7 @@ Main Page</text>
           <textattr colour="Black"
                     bold="false"/>
           <text tool="CPN Tools"
-                version="4.0.1">true</text>
+                version="4.0.1">1`()</text>
         </initmark>
       </place>
       <place id="ID1436956601">
@@ -792,8 +785,8 @@ logs out</text>
              h="40.000000"/>
         <binding x="7.200000"
                  y="-3.000000"/>
-        <cond id="ID1436956865">
-          <posattr x="-84.000000"
+        <cond id="ID1436961226">
+          <posattr x="-162.000000"
                    y="73.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
@@ -804,7 +797,7 @@ logs out</text>
           <textattr colour="Black"
                     bold="false"/>
           <text tool="CPN Tools"
-                version="4.0.1">[isOnMainPage = true]</text>
+                version="4.0.1"/>
         </cond>
         <time id="ID1436956866">
           <posattr x="-0.500000"
@@ -880,7 +873,7 @@ logs out</text>
                     bold="false"/>
         </bendpoint>
         <annot id="ID1436958951">
-          <posattr x="-208.000000"
+          <posattr x="-164.000000"
                    y="91.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
@@ -891,7 +884,7 @@ logs out</text>
           <textattr colour="Black"
                     bold="false"/>
           <text tool="CPN Tools"
-                version="4.0.1">isOnMainPage</text>
+                version="4.0.1">1`()</text>
         </annot>
       </arc>
       <arc id="ID1436957291"
@@ -924,7 +917,7 @@ logs out</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1436960727">
+        <annot id="ID1436960777">
           <posattr x="-182.000000"
                    y="16.000000"/>
           <fillattr colour="White"
@@ -969,7 +962,7 @@ logs out</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1436960728">
+        <annot id="ID1436960778">
           <posattr x="14.000000"
                    y="44.000000"/>
           <fillattr colour="White"
@@ -1014,7 +1007,7 @@ logs out</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1436960729">
+        <annot id="ID1436960779">
           <posattr x="14.000000"
                    y="41.000000"/>
           <fillattr colour="White"
@@ -1058,6 +1051,11 @@ logs out</text>
           <text>&lt;same as model&gt;</text>
         </value>
       </option>
+      <option name="extensions.10003.enable">
+        <value>
+          <boolean>true</boolean>
+        </value>
+      </option>
       <option name="extensions.10005.enable">
         <value>
           <boolean>true</boolean>
@@ -1068,32 +1066,12 @@ logs out</text>
           <boolean>true</boolean>
         </value>
       </option>
-      <option name="extensions.10007.enable">
-        <value>
-          <boolean>true</boolean>
-        </value>
-      </option>
-      <option name="extensions.10002.enable">
-        <value>
-          <boolean>true</boolean>
-        </value>
-      </option>
-      <option name="extensions.10006.enable">
-        <value>
-          <boolean>true</boolean>
-        </value>
-      </option>
-      <option name="extensions.10011.enable">
-        <value>
-          <boolean>true</boolean>
-        </value>
-      </option>
       <option name="extensions.10004.enable">
         <value>
           <boolean>true</boolean>
         </value>
       </option>
-      <option name="extensions.10003.enable">
+      <option name="extensions.10007.enable">
         <value>
           <boolean>true</boolean>
         </value>
@@ -1103,12 +1081,17 @@ logs out</text>
           <boolean>true</boolean>
         </value>
       </option>
-      <option name="extensions.10007.options.discover">
+      <option name="extensions.10006.enable">
         <value>
-          <boolean>false</boolean>
+          <boolean>true</boolean>
         </value>
       </option>
-      <option name="extensions.10011.options.disable">
+      <option name="extensions.10002.enable">
+        <value>
+          <boolean>true</boolean>
+        </value>
+      </option>
+      <option name="extensions.10007.options.discover">
         <value>
           <boolean>false</boolean>
         </value>
@@ -1408,10 +1391,6 @@ logs out</text>
           <IndexNode expanded="false"/>
           <IndexNode expanded="false"/>
           <IndexNode expanded="false"/>
-          <IndexNode expanded="false"/>
-        </IndexNode>
-        <IndexNode expanded="false">
-          <IndexNode expanded="false"/>
         </IndexNode>
         <IndexNode expanded="false">
           <IndexNode expanded="false"/>
@@ -1434,7 +1413,6 @@ logs out</text>
           <IndexNode expanded="true"/>
         </IndexNode>
         <IndexNode expanded="true">
-          <IndexNode expanded="true"/>
           <IndexNode expanded="true"/>
           <IndexNode expanded="true"/>
         </IndexNode>

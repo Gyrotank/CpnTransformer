@@ -7,10 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import hlomozda.cpnio.cpn.Arc;
-import hlomozda.cpnio.cpn.ColoredPetriNet;
-import hlomozda.cpnio.cpn.Page;
-import hlomozda.cpnio.cpn.Place;
+import hlomozda.cpnio.cpn.*;
 import hlomozda.cpnio.definitions.ArcXmlDefinitions;
 
 public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> {
@@ -20,49 +17,59 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
         List<Map<String, List<String>>> result = new ArrayList<>();
 
         for (Page page : cpn.getPages()) {
-            Map<String, List<String>> scenario = new HashMap<>();
-            List<String> preconditions = new ArrayList<>();
-            List<String> actions = new ArrayList<>();
-            List<String> postconditions = new ArrayList<>();
-            List<String> examples = new ArrayList<>();
+            result.add(processPage(page));
+        }
 
-            page.getPlaces().forEach(p -> {
-                List<Arc> arcsFromPlace = page.getArcs().stream()
-                        .filter(a -> a.getPlace().equals(p) && a.getOrientation().equals(Arc.Orientation.TO_TRANS))
-                        .collect(Collectors.toList());
-                List<Arc> arcsToPlace = page.getArcs().stream()
-                        .filter(a -> a.getPlace().equals(p) && a.getOrientation().equals(Arc.Orientation.TO_PLACE))
-                        .collect(Collectors.toList());
-                if (!arcsFromPlace.isEmpty()) {
+        return result;
+    }
+
+    private Map<String, List<String>> processPage(final Page page) {
+        Map<String, List<String>> scenario = new HashMap<>();
+        List<String> preconditions = new ArrayList<>();
+        List<Transition> processedTransitions = new ArrayList<>();
+        List<String> actions = new ArrayList<>();
+        List<String> postconditions = new ArrayList<>();
+        List<String> examples = new ArrayList<>();
+
+        page.getPlaces().forEach(p -> {
+            List<Arc> arcsFromPlace = page.getArcs().stream()
+                    .filter(a -> a.getPlace().equals(p) && a.getOrientation().equals(Arc.Orientation.TO_TRANS))
+                    .collect(Collectors.toList());
+            List<Arc> arcsToPlace = page.getArcs().stream()
+                    .filter(a -> a.getPlace().equals(p) && a.getOrientation().equals(Arc.Orientation.TO_PLACE))
+                    .collect(Collectors.toList());
+            if (!arcsFromPlace.isEmpty()) {
+                for (Arc currentArc : arcsFromPlace) {
                     StringBuilder statement = new StringBuilder(p.getNameValue());
-                    String arcAnnotation = arcsFromPlace.get(0).getAnnotation().getValue();
+                    String arcAnnotation = currentArc.getAnnotation().getValue();
                     if (!ArcXmlDefinitions.DEFAULT_ANNOTATION.equals(arcAnnotation)) {
                         statement.append(" with parameters: <").append(arcAnnotation).append(">");
                     }
                     preconditions.add(statement.toString());
-                    if (!arcsFromPlace.get(0).getTransition().getCondition().getValue().isEmpty()) {
-                        preconditions.add(arcsFromPlace.get(0).getTransition().getCondition().getValue());
+                    Transition targetTransition = currentArc.getTransition();
+                    if (!targetTransition.getCondition().getValue().isEmpty() && !processedTransitions.contains(targetTransition)) {
+                        preconditions.add(targetTransition.getCondition().getValue());
+                        processedTransitions.add(targetTransition);
                     }
                 }
-                if (!arcsToPlace.isEmpty()) {
-                    postconditions.add(p.getNameValue());
-                }
-                if (!p.getInitMark().getValue().isEmpty()) {
-                    examples.addAll(processInitMarking(page, p));
-                }
-            });
+            }
+            if (!arcsToPlace.isEmpty()) {
+                postconditions.add(p.getNameValue());
+            }
+            if (!p.getInitMark().getValue().isEmpty()) {
+                examples.addAll(processInitMarking(page, p));
+            }
+        });
 
-            page.getTransitions().forEach(t -> actions.add(t.getNameValue()));
+        page.getTransitions().forEach(t -> actions.add(t.getNameValue()));
 
-            scenario.put("Name", Collections.singletonList(page.getName()));
-            scenario.put("Given", preconditions);
-            scenario.put("When", actions);
-            scenario.put("Then", postconditions);
-            scenario.put("Examples", examples);
-            result.add(scenario);
-        }
+        scenario.put("Name", Collections.singletonList(page.getName()));
+        scenario.put("Given", preconditions);
+        scenario.put("When", actions);
+        scenario.put("Then", postconditions);
+        scenario.put("Examples", examples);
 
-        return result;
+        return scenario;
     }
 
     private List<String> processInitMarking(final Page page, final Place place) {

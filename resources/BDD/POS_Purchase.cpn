@@ -160,6 +160,60 @@ record cart:ITEMS
           <layout>var tax: REAL;</layout>
         </var>
       </block>
+      <block id="ID1437029792">
+        <id>Custom Functions</id>
+        <ml id="ID1437030823">fun calculateBasePrice(item::items:ITEMS) : REAL =
+(#price item * real (#qty item)) + calculateBasePrice(items)
+| calculateBasePrice([]) = 0.0;
+          <layout>fun calculateBasePrice(item::items:ITEMS) : REAL =
+(#price item * real (#qty item)) + calculateBasePrice(items)
+| calculateBasePrice([]) = 0.0;</layout>
+        </ml>
+        <ml id="ID1437052307">fun calculateTotalPrice(basePrice:REAL, tax:REAL) : REAL =
+real (ceil ((basePrice + (basePrice * tax)) * 100.0)) / 100.0;
+          <layout>fun calculateTotalPrice(basePrice:REAL, tax:REAL) : REAL =
+real (ceil ((basePrice + (basePrice * tax)) * 100.0)) / 100.0;</layout>
+        </ml>
+        <ml id="ID1437029941">fun setOrderCart(order:ORDER, 
+items:ITEMS) : ORDER = 
+ORDER.set_cart order items;
+          <layout>fun setOrderCart(order:ORDER, 
+items:ITEMS) : ORDER = 
+ORDER.set_cart order items;</layout>
+        </ml>
+        <ml id="ID1437036643">fun setOrderBasePrice(order:ORDER, 
+basePrice : REAL) : ORDER = 
+ORDER.set_basePrice order basePrice;
+          <layout>fun setOrderBasePrice(order:ORDER, 
+basePrice : REAL) : ORDER = 
+ORDER.set_basePrice order basePrice;</layout>
+        </ml>
+        <ml id="ID1437038695">fun setOrderTax(order:ORDER, 
+tax : REAL) : ORDER = 
+ORDER.set_tax order tax;
+          <layout>fun setOrderTax(order:ORDER, 
+tax : REAL) : ORDER = 
+ORDER.set_tax order tax;</layout>
+        </ml>
+        <ml id="ID1437039755">fun setOrderTotalPrice(order:ORDER, 
+totalPrice : REAL) : ORDER = 
+ORDER.set_totalPrice order totalPrice;
+          <layout>fun setOrderTotalPrice(order:ORDER, 
+totalPrice : REAL) : ORDER = 
+ORDER.set_totalPrice order totalPrice;</layout>
+        </ml>
+        <ml id="ID1437040202">fun setOrder(order:ORDER, items:ITEMS, 
+tax:REAL) : ORDER =
+setOrderTotalPrice(setOrderTax(setOrderBasePrice(setOrderCart(order, items), 
+calculateBasePrice(items)), tax), 
+calculateTotalPrice(calculateBasePrice(items), tax));
+          <layout>fun setOrder(order:ORDER, items:ITEMS, 
+tax:REAL) : ORDER =
+setOrderTotalPrice(setOrderTax(setOrderBasePrice(setOrderCart(order, items), 
+calculateBasePrice(items)), tax), 
+calculateTotalPrice(calculateBasePrice(items), tax));</layout>
+        </ml>
+      </block>
     </globbox>
     <page id="ID6">
       <pageattr name="Purchase with Cash"/>
@@ -429,7 +483,7 @@ Be Bought</text>
                     bold="false"/>
           <text tool="CPN Tools"
                 version="4.0.1">[{sku=&quot;1003567&quot;, 
-qty=1, 
+qty=2, 
 price=12.99}]</text>
         </initmark>
       </place>
@@ -947,7 +1001,7 @@ order</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1436967966">
+        <annot id="ID1437026466">
           <posattr x="60.000000"
                    y="-115.000000"/>
           <fillattr colour="White"
@@ -1050,7 +1104,7 @@ order</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1436967967">
+        <annot id="ID1437026467">
           <posattr x="144.000000"
                    y="-115.000000"/>
           <fillattr colour="White"
@@ -1140,7 +1194,7 @@ order</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1436967968">
+        <annot id="ID1437026468">
           <posattr x="239.000000"
                    y="-66.000000"/>
           <fillattr colour="White"
@@ -1333,7 +1387,7 @@ order</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1436986147">
+        <annot id="ID1437026469">
           <posattr x="396.000000"
                    y="-115.000000"/>
           <fillattr colour="White"
@@ -1424,7 +1478,7 @@ order</text>
                     bold="false"/>
         </bendpoint>
         <annot id="ID1437003388">
-          <posattr x="377.000000"
+          <posattr x="431.000000"
                    y="-243.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
@@ -1435,7 +1489,7 @@ order</text>
           <textattr colour="Black"
                     bold="false"/>
           <text tool="CPN Tools"
-                version="4.0.1">order</text>
+                version="4.0.1">setOrder(order, li, tax)</text>
         </annot>
       </arc>
       <arc id="ID1437007136"
@@ -1468,7 +1522,7 @@ order</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1437007137">
+        <annot id="ID1437026470">
           <posattr x="491.000000"
                    y="-66.000000"/>
           <fillattr colour="White"
@@ -1843,14 +1897,14 @@ order</text>
     </options>
     <binders>
       <cpnbinder id="ID2222"
-                 x="433"
+                 x="625"
                  y="31"
                  width="1206"
                  height="724">
         <sheets>
           <cpnsheet id="ID2215"
-                    panx="-376.000000"
-                    pany="-6.000000"
+                    panx="-517.000000"
+                    pany="-55.000000"
                     zoom="1.000000"
                     instance="ID2149">
             <zorder>
@@ -1864,7 +1918,7 @@ order</text>
       </cpnbinder>
     </binders>
     <monitorblock name="Monitors"/>
-    <IndexNode expanded="false">
+    <IndexNode expanded="true">
       <IndexNode expanded="false"/>
       <IndexNode expanded="false"/>
       <IndexNode expanded="false">
@@ -1944,7 +1998,7 @@ order</text>
           <IndexNode expanded="true"/>
           <IndexNode expanded="true"/>
         </IndexNode>
-        <IndexNode expanded="true">
+        <IndexNode expanded="false">
           <IndexNode expanded="false"/>
           <IndexNode expanded="false"/>
           <IndexNode expanded="false"/>
@@ -1955,6 +2009,15 @@ order</text>
         </IndexNode>
         <IndexNode expanded="true">
           <IndexNode expanded="true"/>
+          <IndexNode expanded="true"/>
+          <IndexNode expanded="true"/>
+          <IndexNode expanded="true"/>
+          <IndexNode expanded="true"/>
+          <IndexNode expanded="true"/>
+          <IndexNode expanded="true"/>
+          <IndexNode expanded="true"/>
+        </IndexNode>
+        <IndexNode expanded="true">
           <IndexNode expanded="true"/>
           <IndexNode expanded="true"/>
           <IndexNode expanded="true"/>

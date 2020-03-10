@@ -551,7 +551,7 @@ Order Page</text>
                   type="Solid"/>
         <textattr colour="Black"
                   bold="false"/>
-        <text>Order Data
+        <text>Order Data 
 is Visible</text>
         <ellipse w="90.000000"
                  h="94.000000"/>
@@ -896,7 +896,7 @@ logs in</text>
                   type="solid"/>
         <textattr colour="Black"
                   bold="false"/>
-        <text>user adds
+        <text>user adds 
 items to cart</text>
         <box w="136.000000"
              h="40.000000"/>
@@ -971,7 +971,7 @@ items to cart</text>
                   type="solid"/>
         <textattr colour="Black"
                   bold="false"/>
-        <text>user checks out
+        <text>user checks out 
 order</text>
         <box w="136.000000"
              h="40.000000"/>
@@ -1046,7 +1046,7 @@ order</text>
                   type="solid"/>
         <textattr colour="Black"
                   bold="false"/>
-        <text>user pays for
+        <text>user pays for 
 order</text>
         <box w="136.000000"
              h="40.000000"/>
@@ -1995,8 +1995,8 @@ order</text>
                     bold="false"/>
         </bendpoint>
         <annot id="ID1437059272">
-          <posattr x="777.000000"
-                   y="-199.000000"/>
+          <posattr x="703.000000"
+                   y="-325.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -2464,7 +2464,7 @@ totalPrice=0.0}</text>
       </cpnbinder>
     </binders>
     <monitorblock name="Monitors"/>
-    <IndexNode expanded="false">
+    <IndexNode expanded="true">
       <IndexNode expanded="false"/>
       <IndexNode expanded="false"/>
       <IndexNode expanded="false">

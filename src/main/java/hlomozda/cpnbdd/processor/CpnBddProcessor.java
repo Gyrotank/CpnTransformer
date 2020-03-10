@@ -80,7 +80,9 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
         }
 
         String variableName = page.getArcs().stream()
-                .filter(a -> a.getPlace().equals(place) && a.getOrientation().equals(Arc.Orientation.TO_TRANS))
+                .filter(a -> a.getPlace().equals(place)
+                        && (a.getOrientation().equals(Arc.Orientation.TO_TRANS)
+                            || a.getOrientation().equals(Arc.Orientation.BOTH_DIR)))
                 .collect(Collectors.toList()).get(0).getAnnotation().getValue();
         String variableValue = place.getInitMark().getValue();
 

@@ -52,11 +52,23 @@ public class CpnToBdd {
                 outCpnNet.write(line.getBytes());
                 outCpnNet.write(System.lineSeparator().getBytes());
 
-                outputPreconditions(outCpnNet, scenario.get("Given"));
+                for (Map.Entry<String, List<String>> entry : scenario.entrySet()) {
+                    if (entry.getKey().contentEquals("Given")) {
+                        outputPreconditions(outCpnNet, entry.getValue());
+                    }
 
-                outputActions(outCpnNet, scenario.get("When"));
+                    if (entry.getKey().contains("When")) {
+                        outputActions(outCpnNet, entry.getValue());
+                    }
 
-                outputPostconditions(outCpnNet, scenario.get("Then"));
+                    if (entry.getKey().contains("Then")) {
+                        outputPostconditions(outCpnNet, entry.getValue());
+                    }
+
+                    if (entry.getKey().contains("Error")) {
+                        outputErrors(outCpnNet, entry.getValue());
+                    }
+                }
 
                 outputExamples(outCpnNet, scenario.get("Examples"));
 
@@ -96,6 +108,17 @@ public class CpnToBdd {
         if (Objects.nonNull(postconditions) && !postconditions.isEmpty()) {
             for (int i = 0; i < postconditions.size(); i++) {
                 String line = (i == 0 ? "Then " : "And ") + postconditions.get(i).replace("\n", "");
+                logger.info(line);
+                outCpnNet.write(line.getBytes());
+                outCpnNet.write(System.lineSeparator().getBytes());
+            }
+        }
+    }
+
+    private static void outputErrors(final OutputStream outCpnNet, final List<String> errors) throws IOException {
+        if (Objects.nonNull(errors) && !errors.isEmpty()) {
+            for (int i = 0; i < errors.size(); i++) {
+                String line = "ERROR" + i + " " + errors.get(i).replace("\n", "");
                 logger.info(line);
                 outCpnNet.write(line.getBytes());
                 outCpnNet.write(System.lineSeparator().getBytes());

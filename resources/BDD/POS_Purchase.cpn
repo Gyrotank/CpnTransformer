@@ -1172,7 +1172,7 @@ order</text>
           <textattr colour="Black"
                     bold="false"/>
           <text tool="CPN Tools"
-                version="4.0.1">[#isLoggedIn u = true  ]</text>
+                version="4.0.1">[#isLoggedIn u = true]</text>
         </cond>
         <time id="ID1437056450">
           <posattr x="922.500000"
@@ -1292,7 +1292,7 @@ order</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1437062061">
+        <annot id="ID1437062976">
           <posattr x="60.000000"
                    y="-115.000000"/>
           <fillattr colour="White"
@@ -1382,7 +1382,7 @@ order</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1437062062">
+        <annot id="ID1437062977">
           <posattr x="144.000000"
                    y="-115.000000"/>
           <fillattr colour="White"
@@ -1472,7 +1472,7 @@ order</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1437062063">
+        <annot id="ID1437062978">
           <posattr x="239.000000"
                    y="-66.000000"/>
           <fillattr colour="White"
@@ -1652,7 +1652,7 @@ order</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1437062064">
+        <annot id="ID1437062979">
           <posattr x="396.000000"
                    y="-115.000000"/>
           <fillattr colour="White"
@@ -1787,7 +1787,7 @@ order</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1437062065">
+        <annot id="ID1437062980">
           <posattr x="491.000000"
                    y="-66.000000"/>
           <fillattr colour="White"
@@ -1967,7 +1967,7 @@ order</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1437062066">
+        <annot id="ID1437062981">
           <posattr x="648.000000"
                    y="-115.000000"/>
           <fillattr colour="White"
@@ -2057,7 +2057,7 @@ order</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1437062067">
+        <annot id="ID1437062982">
           <posattr x="743.000000"
                    y="-66.000000"/>
           <fillattr colour="White"
@@ -2195,7 +2195,7 @@ totalPrice=0.0}</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1437062871">
+        <annot id="ID1437062983">
           <posattr x="900.000000"
                    y="-115.000000"/>
           <fillattr colour="White"
@@ -2631,9 +2631,7 @@ totalPrice=0.0}</text>
           <IndexNode expanded="false"/>
         </IndexNode>
       </IndexNode>
-      <IndexNode expanded="false">
-        <IndexNode expanded="false"/>
-      </IndexNode>
+      <IndexNode expanded="false"/>
       <IndexNode expanded="true">
         <IndexNode expanded="false">
           <IndexNode expanded="true"/>

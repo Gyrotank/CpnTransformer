@@ -2,7 +2,7 @@ package hlomozda.cpnbdd.processor;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -24,7 +24,7 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
     }
 
     private Map<String, List<String>> processPage(final Page page) {
-        Map<String, List<String>> scenario = new HashMap<>();
+        Map<String, List<String>> scenario = new LinkedHashMap<>();
 
         List<Place> allPlaces = page.getPlaces();
         List<Place> visitedPlaces = new ArrayList<>();
@@ -58,45 +58,76 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
                     }
                 }
             }
-            tieredPlaces.add(new ArrayList<>());
-            List<Place> processedPlaces = new ArrayList<>();
-            for (Transition currentTransition : tieredTransitions.get(index)) {
-                if (!visitedTransitions.contains(currentTransition)) {
-                    visitedTransitions.add(currentTransition);
-                    for (Arc currentArc : arcsFromTransition(page, currentTransition)) {
-                        Place targetPlace = currentArc.getPlace();
-                        if (!processedPlaces.contains(targetPlace)) {
-                            tieredPlaces.get(index + 1).add(targetPlace);
-                            processedPlaces.add(targetPlace);
+            if (visitedPlaces.size() < allPlaces.size()) {
+                tieredPlaces.add(new ArrayList<>());
+                List<Place> processedPlaces = new ArrayList<>();
+                for (Transition currentTransition : tieredTransitions.get(index)) {
+                    if (!visitedTransitions.contains(currentTransition)) {
+                        visitedTransitions.add(currentTransition);
+                        for (Arc currentArc : arcsFromTransition(page, currentTransition)) {
+                            Place targetPlace = currentArc.getPlace();
+                            if (!processedPlaces.contains(targetPlace)) {
+                                tieredPlaces.get(index + 1).add(targetPlace);
+                                processedPlaces.add(targetPlace);
+                            }
                         }
                     }
                 }
+                index++;
             }
-            index++;
         }
 
         List<List<String>> conditions = new ArrayList<>();
-        conditions.add(new ArrayList<>());
-
         List<String> examples = new ArrayList<>();
 
         for (int i = 0; i < tieredPlaces.size(); i++) {
+            conditions.add(new ArrayList<>());
+            List<Transition> processedTransitions = new ArrayList<>();
+            for (Place currentPlace : tieredPlaces.get(i)) {
+                StringBuilder statement = new StringBuilder(currentPlace.getNameValue());
+                for (Arc currentArc : arcsFromPlace(page, currentPlace)) {
+                    String arcAnnotation = currentArc.getAnnotation().getValue();
+                    if (!ArcXmlDefinitions.DEFAULT_ANNOTATION.equals(arcAnnotation)) {
+                        statement.append(" with parameters: <").append(arcAnnotation).append(">");
+                    }
 
+                    Transition targetTransition = currentArc.getTransition();
+                    if (!processedTransitions.contains(targetTransition)) {
+                        if (!targetTransition.getCondition().getValue().isEmpty()) {
+                            conditions.get(i).add(targetTransition.getCondition().getValue());
+                        }
+                        processedTransitions.add(targetTransition);
+                    }
+                }
+                conditions.get(i).add(statement.toString());
+
+                if (!currentPlace.getInitMark().getValue().isEmpty()) {
+                    examples.addAll(processInitMarking(page, currentPlace));
+                }
+            }
         }
 
         List<List<String>> actions = new ArrayList<>();
-        actions.add(new ArrayList<>());
 
         for (int i = 0; i < tieredTransitions.size(); i++) {
-
+            actions.add(new ArrayList<>());
+            for (Transition currentTransition : tieredTransitions.get(i)) {
+                actions.get(i).add(currentTransition.getNameValue());
+            }
         }
-
-//        page.getTransitions().forEach(t -> actions.add(t.getNameValue()));
 
         scenario.put("Name", Collections.singletonList(page.getName()));
         scenario.put("Given", conditions.get(0));
-        scenario.put("When", actions.get(0));
-//        scenario.put("Then", postconditions);
+        for (int i = 0; i < tieredTransitions.size(); i++) {
+            scenario.put("When" + i, actions.get(i));
+            if (conditions.size() > i + 1) {
+                scenario.put("Then" + i, conditions.get(i + 1));
+            } else {
+                List<String> errorMessage =
+                        new ArrayList<>(Collections.singletonList("Too few place tiers! Try to modify your CPN to have dedicated post-conditions!"));
+                scenario.put("Error" + i, errorMessage);
+            }
+        }
         scenario.put("Examples", examples);
 
         return scenario;
@@ -133,7 +164,7 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
         String variableName = page.getArcs().stream()
                 .filter(a -> a.getPlace().equals(place)
                         && (a.getOrientation().equals(Arc.Orientation.TO_TRANS)
-                            || a.getOrientation().equals(Arc.Orientation.BOTH_DIR)))
+                        || a.getOrientation().equals(Arc.Orientation.BOTH_DIR)))
                 .collect(Collectors.toList()).get(0).getAnnotation().getValue();
         String variableValue = place.getInitMark().getValue().replaceAll("\\R", " ");
 

@@ -21,6 +21,9 @@ public final class PlaceXmlDefinitions implements XmlDefinitions {
     public static final String TAG_TYPE_OPEN = "<type id=\"ID%s\">";
     public static final String TAG_TYPE_CLOSE = "</type>";
 
+    public static final String TYPE_AUXILLARY = "[AUX]";
+    public static final String TYPE_DATA = "[DATA]";
+
     private PlaceXmlDefinitions() {       
     }
 }

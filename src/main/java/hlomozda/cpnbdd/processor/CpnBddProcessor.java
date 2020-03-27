@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import hlomozda.cpnio.cpn.*;
 import hlomozda.cpnio.definitions.ArcXmlDefinitions;
+import hlomozda.cpnio.definitions.PlaceXmlDefinitions;
 
 public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> {
 
@@ -26,7 +27,10 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
     private Map<String, List<String>> processPage(final Page page) {
         Map<String, List<String>> scenario = new LinkedHashMap<>();
 
-        List<Place> allPlaces = page.getPlaces();
+        List<Place> allPlaces = page.getPlaces().stream().filter(p -> !isNotProcessiblePlace(p)).collect(Collectors.toList());
+        List<Place> dataPlaces =
+                page.getPlaces().stream().filter(p -> p.getNameValue().contains(PlaceXmlDefinitions.TYPE_DATA)).collect(Collectors.toList());
+        allPlaces.removeIf(this::isNotProcessiblePlace);
         List<Place> visitedPlaces = new ArrayList<>();
 
         List<List<Place>> tieredPlaces = new ArrayList<>();
@@ -58,6 +62,7 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
                     }
                 }
             }
+
             if (visitedPlaces.size() < allPlaces.size()) {
                 tieredPlaces.add(new ArrayList<>());
                 List<Place> processedPlaces = new ArrayList<>();
@@ -66,7 +71,7 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
                         visitedTransitions.add(currentTransition);
                         for (Arc currentArc : arcsFromTransition(page, currentTransition)) {
                             Place targetPlace = currentArc.getPlace();
-                            if (!processedPlaces.contains(targetPlace)) {
+                            if (!isNotProcessiblePlace(targetPlace) && !processedPlaces.contains(targetPlace)) {
                                 tieredPlaces.get(index + 1).add(targetPlace);
                                 processedPlaces.add(targetPlace);
                             }
@@ -75,6 +80,10 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
                 }
                 index++;
             }
+        }
+
+        if (tieredTransitions.get(tieredTransitions.size() - 1).isEmpty()) {
+            tieredTransitions.remove(tieredTransitions.size() - 1);
         }
 
         List<List<String>> conditions = new ArrayList<>();
@@ -117,6 +126,7 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
         }
 
         scenario.put("Name", Collections.singletonList(page.getName()));
+
         scenario.put("Given", conditions.get(0));
         for (int i = 0; i < tieredTransitions.size(); i++) {
             scenario.put("When" + i, actions.get(i));
@@ -128,9 +138,20 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
                 scenario.put("Error" + i, errorMessage);
             }
         }
+
+        dataPlaces.forEach(p -> {
+            if (!p.getInitMark().getValue().isEmpty()) {
+                examples.addAll(processInitMarking(page, p));
+            }
+        });
         scenario.put("Examples", examples);
 
         return scenario;
+    }
+
+    private boolean isNotProcessiblePlace(final Place place) {
+        return place.getNameValue().contains(PlaceXmlDefinitions.TYPE_AUXILLARY)
+                || place.getNameValue().contains(PlaceXmlDefinitions.TYPE_DATA);
     }
 
     private List<Arc> arcsFromPlace(final Page page, final Place place) {

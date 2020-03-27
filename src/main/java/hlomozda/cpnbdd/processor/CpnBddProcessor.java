@@ -27,16 +27,19 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
     private Map<String, List<String>> processPage(final Page page) {
         Map<String, List<String>> scenario = new LinkedHashMap<>();
 
-        List<Place> allPlaces = page.getPlaces().stream().filter(p -> !isNotProcessiblePlace(p)).collect(Collectors.toList());
+        //add processible places
+        List<Place> allPlaces = page.getPlaces().stream().filter(this::isProcessiblePlace).collect(Collectors.toList());
+
+        //all places marked with [DATA] block
         List<Place> dataPlaces =
                 page.getPlaces().stream().filter(p -> p.getNameValue().contains(PlaceXmlDefinitions.TYPE_DATA)).collect(Collectors.toList());
-        allPlaces.removeIf(this::isNotProcessiblePlace);
+
         List<Place> visitedPlaces = new ArrayList<>();
 
         List<List<Place>> tieredPlaces = new ArrayList<>();
         tieredPlaces.add(new ArrayList<>());
 
-        //create tier of preconditions (places with no input arcs) and
+        //create tier of preconditions (places with no input arcs)
         allPlaces.forEach(p -> {
             if (arcsToPlace(page, p).isEmpty() && !arcsFromPlace(page, p).isEmpty()) {
                 tieredPlaces.get(0).add(p);
@@ -46,6 +49,7 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
         List<Transition> visitedTransitions = new ArrayList<>();
         List<List<Transition>> tieredTransitions = new ArrayList<>();
 
+        //split places and transitions into tiers
         int index = 0;
         while (visitedPlaces.size() < allPlaces.size()) {
             tieredTransitions.add(new ArrayList<>());
@@ -71,7 +75,7 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
                         visitedTransitions.add(currentTransition);
                         for (Arc currentArc : arcsFromTransition(page, currentTransition)) {
                             Place targetPlace = currentArc.getPlace();
-                            if (!isNotProcessiblePlace(targetPlace) && !processedPlaces.contains(targetPlace)) {
+                            if (isProcessiblePlace(targetPlace) && !processedPlaces.contains(targetPlace)) {
                                 tieredPlaces.get(index + 1).add(targetPlace);
                                 processedPlaces.add(targetPlace);
                             }
@@ -82,6 +86,7 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
             }
         }
 
+        //remove extra tier of transitions which can be created if there are unprocessible places
         if (tieredTransitions.get(tieredTransitions.size() - 1).isEmpty()) {
             tieredTransitions.remove(tieredTransitions.size() - 1);
         }
@@ -89,6 +94,7 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
         List<List<String>> conditions = new ArrayList<>();
         List<String> examples = new ArrayList<>();
 
+        //process tiered places into tiered scenario
         for (int i = 0; i < tieredPlaces.size(); i++) {
             conditions.add(new ArrayList<>());
             List<Transition> processedTransitions = new ArrayList<>();
@@ -116,8 +122,23 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
             }
         }
 
-        List<List<String>> actions = new ArrayList<>();
+        //add DATA places as preconditions
+        for (Place currentPlace : dataPlaces) {
+            StringBuilder statement = new StringBuilder(currentPlace.getNameValue());
+            for (Arc currentArc : arcsFromPlace(page, currentPlace)) {
+                String arcAnnotation = currentArc.getAnnotation().getValue();
+                if (!ArcXmlDefinitions.DEFAULT_ANNOTATION.equals(arcAnnotation)) {
+                    statement.append(" with parameters: <").append(arcAnnotation).append(">");
+                }
+            }
+            conditions.get(0).add(statement.toString());
 
+            if (!currentPlace.getInitMark().getValue().isEmpty()) {
+                examples.addAll(processInitMarking(page, currentPlace));
+            }
+        }
+
+        List<List<String>> actions = new ArrayList<>();
         for (int i = 0; i < tieredTransitions.size(); i++) {
             actions.add(new ArrayList<>());
             for (Transition currentTransition : tieredTransitions.get(i)) {
@@ -139,19 +160,14 @@ public class CpnBddProcessor implements CpnProcessor<Map<String, List<String>>> 
             }
         }
 
-        dataPlaces.forEach(p -> {
-            if (!p.getInitMark().getValue().isEmpty()) {
-                examples.addAll(processInitMarking(page, p));
-            }
-        });
         scenario.put("Examples", examples);
 
         return scenario;
     }
 
-    private boolean isNotProcessiblePlace(final Place place) {
-        return place.getNameValue().contains(PlaceXmlDefinitions.TYPE_AUXILLARY)
-                || place.getNameValue().contains(PlaceXmlDefinitions.TYPE_DATA);
+    private boolean isProcessiblePlace(final Place place) {
+        return !place.getNameValue().contains(PlaceXmlDefinitions.TYPE_AUXILLARY)
+                && !place.getNameValue().contains(PlaceXmlDefinitions.TYPE_DATA);
     }
 
     private List<Arc> arcsFromPlace(final Page page, final Place place) {

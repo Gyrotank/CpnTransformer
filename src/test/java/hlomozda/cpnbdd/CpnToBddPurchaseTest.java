@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class CpnToBddTest {
+class CpnToBddPurchaseTest {
 
     private static ColoredPetriNet cpn;
 
@@ -26,7 +26,7 @@ class CpnToBddTest {
     static void init() throws IOException {
         System.setProperty("javax.xml.accessExternalDTD", "http");
 
-        try (InputStream in = new FileInputStream("src/test/resources/BDD1.cpn")) {
+        try (InputStream in = new FileInputStream("src/test/resources/POS_Purchase.cpn")) {
             CpnParser parser = new DomCpnParser();
             cpn = parser.parse(in);
         }
@@ -38,16 +38,17 @@ class CpnToBddTest {
 
         List<Map<String, List<String>>> processedCpn = new ArrayList<>(processor.process(cpn));
 
-        assertEquals(2, processedCpn.size());
+        assertEquals(1, processedCpn.size());
         assertEquals(1, processedCpn.get(0).get("Name").size());
-        assertEquals(3, processedCpn.get(0).get("Given").size());
+        assertEquals(5, processedCpn.get(0).get("Given").size());
         assertEquals(1, processedCpn.get(0).get("When0").size());
-        assertEquals(2, processedCpn.get(0).get("Then0").size());
-        assertEquals(2, processedCpn.get(0).get("Examples").size());
-        assertEquals(1, processedCpn.get(1).get("Name").size());
-        assertEquals(2, processedCpn.get(1).get("Given").size());
-        assertEquals(1, processedCpn.get(1).get("When0").size());
-        assertEquals(2, processedCpn.get(1).get("Then0").size());
-        assertEquals(0, processedCpn.get(1).get("Examples").size());
+        assertEquals(3, processedCpn.get(0).get("Then0").size());
+        assertEquals(1, processedCpn.get(0).get("When1").size());
+        assertEquals(3, processedCpn.get(0).get("Then1").size());
+        assertEquals(1, processedCpn.get(0).get("When2").size());
+        assertEquals(3, processedCpn.get(0).get("Then2").size());
+        assertEquals(1, processedCpn.get(0).get("When3").size());
+        assertEquals(2, processedCpn.get(0).get("Then3").size());
+        assertEquals(6, processedCpn.get(0).get("Examples").size());
     }
 }
